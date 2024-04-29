@@ -3,7 +3,7 @@ package utilz;
 import main.Game;
 
 public class SpecialHelpMethods {
-    public static boolean CanMoveThere(float x, float y, int width, int height, int[][] levelData){
+    public static boolean CanMoveThere(float x, float y, float width, float height, int[][] levelData){
        if(!IsTile(x,y,levelData)){
            if(!IsTile(x + width,y + height,levelData)){
                if(!IsTile(x + width,y,levelData)){
