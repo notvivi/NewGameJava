@@ -4,7 +4,6 @@ import entities.Player;
 import levels.LevelManager;
 
 import java.awt.*;
-import java.security.PublicKey;
 
 public class Game implements Runnable {
 
@@ -16,7 +15,7 @@ public class Game implements Runnable {
     public LevelManager levelManager;
 
     public final static int TILE_SIZE_DEFAULT = 32;
-    public final static float SCALE = 1.5f;
+    public final static float SCALE = 2f;
     public final static int TILES_IN_WIDTH = 26;
     public static int TILES_IN_HEIGHT = 14;
     public final static int TILES_SIZE = (int)(TILE_SIZE_DEFAULT * SCALE);
@@ -34,8 +33,10 @@ public class Game implements Runnable {
     }
 
     private void initClasses() {
-        player = new Player(200,200,(int)(64 * SCALE),(int)(40 * SCALE));
         levelManager = new LevelManager(this);
+        player = new Player(200,200,(int)(64 * SCALE),(int)(40 * SCALE));
+        player.loadLevelData(levelManager.getCurrentLevel().getLevelData());
+
     }
 
     private void startGameLoop(){
@@ -45,7 +46,7 @@ public class Game implements Runnable {
 
     public void update(){
         player.update();
-       levelManager.update();
+        levelManager.update();
     }
     public void render(Graphics g){
      levelManager.draw(g);
@@ -61,7 +62,7 @@ public class Game implements Runnable {
 
         int frames = 0;
         int updates = 0;
-        long lastcheck = System.currentTimeMillis();
+        long lastCheck = System.currentTimeMillis();
 
         double deltaU = 0;
         double deltaF = 0;
@@ -83,8 +84,8 @@ public class Game implements Runnable {
                 frames++;
                 deltaF--;
             }
-            if(System.currentTimeMillis() - lastcheck >= 1000) {
-                lastcheck = System.currentTimeMillis();
+            if(System.currentTimeMillis() - lastCheck >= 1000) {
+                lastCheck = System.currentTimeMillis();
                 System.out.println("FPS" + frames + "UPS" + updates);
                 frames = 0;
                 updates = 0;
@@ -93,7 +94,7 @@ public class Game implements Runnable {
         }
     }
     public void windowFocusLost() {
-        player.resetDirBooleans();
+        player.resetDirectionBooleans();
     }
     public Player getPlayer(){
         return player;
