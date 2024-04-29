@@ -29,6 +29,10 @@ public class KeyBoardInputs implements KeyListener  {
             case KeyEvent.VK_W:
                 gamePanel.getGame().getPlayer().setUp(false);
                 break;
+            case KeyEvent.VK_SPACE:
+                gamePanel.getGame().getPlayer().setJump(false);
+                break;
+
         }
     }
     public void keyPressed(KeyEvent e) {
@@ -45,6 +49,10 @@ public class KeyBoardInputs implements KeyListener  {
             case KeyEvent.VK_W:
                 gamePanel.getGame().getPlayer().setUp(true);
                 break;
+            case KeyEvent.VK_SPACE:
+                gamePanel.getGame().getPlayer().setJump(true);
+                break;
+
         }
     }
 
