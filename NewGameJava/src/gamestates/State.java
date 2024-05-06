@@ -1,7 +1,15 @@
 package gamestates;
 
-public class State {
-    public State(){
+import main.Game;
 
+public class State {
+    private Game game;
+    public State(Game game){
+        this.game = game;
+
+    }
+
+    public Game getGame() {
+        return game;
     }
 }
