@@ -30,7 +30,7 @@ public class Player extends Entity {
     private float earthGravity = 0.05f * Game.SCALE;
     private float jumpSpeed = -2.5f * Game.SCALE;
     private float fallSpeedAfterHit = 0.5f * Game.SCALE;
-    private boolean EntityInAir = false;
+    private boolean PlayerInAir = false;
 
     public Player(float x, float y, int width, int height) {
         super(x, y, width, height);
@@ -43,9 +43,9 @@ public class Player extends Entity {
         updateAnimatonTick();
         setAnimation();
     }
-    public void render(Graphics g){
-        g.drawImage(animations[playerAction][aniIndex], (int) (hitBox.x - xDrawOffSet), (int) (hitBox.y - yDrawOffSet),width,height,null);
-        drawHitBox(g);
+    public void render(Graphics g, int levelOffSet){
+        g.drawImage(animations[playerAction][aniIndex], (int) (hitBox.x - xDrawOffSet) - levelOffSet, (int) (hitBox.y - yDrawOffSet),width,height,null);
+     //   drawHitBox(g);
 
     }
     private void updateAnimatonTick() {
@@ -68,7 +68,7 @@ public class Player extends Entity {
         }else{
             playerAction = IDLE;
         }
-        if(EntityInAir){
+        if(PlayerInAir){
             if(speedInAir < 0){
                 playerAction = JUMP;
             }else{
@@ -95,9 +95,10 @@ public class Player extends Entity {
             jump();
         }
 
-
-        if(!left && !right && !EntityInAir){
-            return;
+        if(!PlayerInAir){
+            if((!left && !right) || (right && left)){
+                return;
+            }
         }
         if (left) {
             xSpeed -= playerSpeed;
@@ -106,13 +107,13 @@ public class Player extends Entity {
             xSpeed += playerSpeed;
         }
 
-        if(!EntityInAir){
+        if(!PlayerInAir){
            if(!SpecialHelpMethods.isEntityOnMap(hitBox,levelData)){
-                EntityInAir = true;
+                PlayerInAir = true;
            }
         }
 
-        if(EntityInAir){
+        if(PlayerInAir){
             if(SpecialHelpMethods.canMoveThere(hitBox.x,hitBox.y + speedInAir, hitBox.width,hitBox.height,levelData)){
                 hitBox.y += speedInAir;
                 speedInAir += earthGravity;
@@ -133,15 +134,15 @@ public class Player extends Entity {
     }
 
     private void jump() {
-        if(EntityInAir){
+        if(PlayerInAir){
             return;
         }
-        EntityInAir = true;
+        PlayerInAir = true;
         speedInAir = jumpSpeed;
     }
 
     private void resetInAir() {
-        EntityInAir = false;
+        PlayerInAir = false;
         speedInAir = 0;
     }
 
@@ -167,7 +168,7 @@ public class Player extends Entity {
     public void loadLevelData(int[][] levelData){
         this.levelData = levelData;
         if(!SpecialHelpMethods.isEntityOnMap(hitBox,levelData)){
-            EntityInAir = true;
+            PlayerInAir = true;
         }
     }
     public void resetDirectionBooleans(){
