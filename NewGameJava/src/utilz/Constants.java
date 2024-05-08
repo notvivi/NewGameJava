@@ -25,6 +25,11 @@ public class Constants {
             public static final int BUTTON_HEIGHT_DEFAULT = 56;
             public static final int BUTTON_WIDTH = (int) (BUTTON_WIDTH_DEFAULT * Game.SCALE);
             public static final int BUTTON_HEIGHT = (int) (BUTTON_HEIGHT_DEFAULT * Game.SCALE);
+
+            public static final int CIRCLE_BUTTON_WIDTH_DEFAULT = 69;
+            public static final int CIRCLE_BUTTON_HEIGHT_DEFAULT = 69;
+            public static final int CIRCLE_BUTTON_WIDTH = (int) (CIRCLE_BUTTON_WIDTH_DEFAULT * Game.SCALE);
+            public static final int CIRCLE_BUTTON_HEIGHT = (int) (CIRCLE_BUTTON_HEIGHT_DEFAULT * Game.SCALE);;
             
         }
     }

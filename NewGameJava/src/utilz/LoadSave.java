@@ -16,7 +16,7 @@ public class LoadSave {
     public static final String MENU_BUTTON_ATLAS = "res/button_atlas.png";
     public static final String MENU_BACKGROUND = "res/menu_background.png";
     public static final String MENU_POKEDEX = "res/menu_background_pokedex.png";
-    public static final String START_BUTTON = "res/button_play.png";
+    public static final String START_BUTTON = "res/play_button2x.png";
     public static final String PIKACHU_MENU_BACKGROUND = "res/pikachu_background.png";
     public static final String LEVEL_BACKGROUND = "res/playing_bg_img.png";
     public static final String BIG_CLOUDS = "res/big_clouds.png";
