@@ -28,7 +28,6 @@ public class MenuButton {
         loadImages();
         isInHitBox();
     }
-
     private void isInHitBox() {
         buttonHitBox = new Rectangle(xPosition - xOffSetCenter,yPosition,Buttons.BUTTON_WIDTH,Buttons.BUTTON_HEIGHT);
     }
@@ -49,11 +48,13 @@ public class MenuButton {
     }
     public void update(){
         index = 0;
-        if(mouseOver){
+        if(mouseOver) {
             index = 1;
-        } else if (mousePressed) {
-           index = 2;
         }
+        if(mousePressed){
+            index = 2;
+        }
+
     }
 
     public void setGameState(){
