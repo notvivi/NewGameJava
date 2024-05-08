@@ -12,6 +12,7 @@ import java.awt.image.BufferedImage;
 public class Start extends State implements MethodsForStates{
     private StartButton[] startButton = new StartButton[1];
     private BufferedImage backgroundImage;
+    private BufferedImage backgroundPikachuImage;
     private int startMenuX;
     private int startMenuY;
     private int startMenuWidth;
@@ -21,6 +22,7 @@ public class Start extends State implements MethodsForStates{
         super(game);
         loadButton();
         loadStartMenuBackground();
+        backgroundPikachuImage = LoadSave.getSpriteAtlas(LoadSave.PIKACHU_MENU_BACKGROUND);
     }
 
     private void loadStartMenuBackground() {
@@ -43,6 +45,7 @@ public class Start extends State implements MethodsForStates{
 
     @Override
     public void draw(Graphics g) {
+        g.drawImage(backgroundPikachuImage,0,0,Game.GAME_WIDTH,Game.GAME_HEIGHT,null);
         g.drawImage(backgroundImage, startMenuX, startMenuY, startMenuWidth, startMenuHeight,null);
         startButton[0].draw(g);
     }
