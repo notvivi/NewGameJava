@@ -21,6 +21,7 @@ public class LoadSave {
     public static final String LEVEL_BACKGROUND = "res/playing_bg_img.png";
     public static final String BIG_CLOUDS = "res/big_clouds.png";
     public static final String SMALL_CLOUD = "res/small_clouds.png";
+    public static final String ICON = "res/pikachu_icon.png";
 
 
 
