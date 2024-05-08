@@ -10,9 +10,9 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
 public class Start extends State implements MethodsForStates{
-    private StartButton[] startButton = new StartButton[1];
+    private final StartButton[] startButtons = new StartButton[1];
     private BufferedImage backgroundImage;
-    private BufferedImage backgroundPikachuImage;
+    private final BufferedImage backgroundPikachuImage;
     private int startMenuX;
     private int startMenuY;
     private int startMenuWidth;
@@ -29,25 +29,30 @@ public class Start extends State implements MethodsForStates{
         backgroundImage = LoadSave.getSpriteAtlas(LoadSave.MENU_POKEDEX);
         startMenuWidth = (int) (backgroundImage.getWidth() * Game.SCALE);
         startMenuHeight = (int) (backgroundImage.getHeight() * Game.SCALE);
-        startMenuX = (int) ((int) (Game.GAME_WIDTH / 2) - startMenuWidth / 2);
+        startMenuX = (Game.GAME_WIDTH / 2) - startMenuWidth / 2;
         startMenuY = (int) (45 * Game.SCALE);
 
     }
 
     private void loadButton() {
-        startButton[0] = new StartButton((int) (Game.GAME_WIDTH / 2.2), (int) (220 * Game.SCALE),0,GameState.MENU);
+        startButtons[0] = new StartButton((int) (Game.GAME_WIDTH / 1.99), (int) (219 * Game.SCALE),0,GameState.MENU);
     }
 
    @Override
      public void update() {
-   //     startButton[0].update();
+       for(StartButton sb: startButtons){
+           sb.update();
+       }
+
      }
 
     @Override
     public void draw(Graphics g) {
         g.drawImage(backgroundPikachuImage,0,0,Game.GAME_WIDTH,Game.GAME_HEIGHT,null);
         g.drawImage(backgroundImage, startMenuX, startMenuY, startMenuWidth, startMenuHeight,null);
-        startButton[0].draw(g);
+        for(StartButton sb: startButtons){
+            sb.draw(g);
+        }
     }
 
     @Override
@@ -57,31 +62,46 @@ public class Start extends State implements MethodsForStates{
 
     @Override
     public void mousePressed(MouseEvent mouseEvent) {
-        if(isInButtonStart(mouseEvent,startButton[0])){
-            startButton[0].setMousePressed(true);
+        for(StartButton sb: startButtons){
+            if(isInButtonStart(mouseEvent, startButtons[0])){
+                sb.setMousePressed(true);
+                break;
+            }
+
         }
 
     }
 
     @Override
     public void mouseReleased(MouseEvent mouseEvent) {
-            if(isInButtonStart(mouseEvent,startButton[0])){
-                if(startButton[0].isMousePressed()){
-                    startButton[0].setGameState();
+        for(StartButton sb: startButtons){
+            if(isInButtonStart(mouseEvent, sb)){
+                if(sb.isMousePressed()){
+                    sb.setGameState();
+                    break;
                 }
             }
+        }
+
         resetButtons();
     }
     private void resetButtons() {
-       startButton[0].resetBooleans();
+        for(StartButton sb: startButtons){
+            sb.resetBooleans();
+        }
     }
 
     @Override
     public void mouseMoved(MouseEvent mouseEvent) {
-        startButton[0].setMouseOver(false);
-        if(isInButtonStart(mouseEvent,startButton[0])){
-            startButton[0].setMouseOver(true);
+        for(StartButton sb: startButtons){
+            sb.setMouseOver(false);
         }
+        for(StartButton sb: startButtons){
+            if(isInButtonStart(mouseEvent, sb)){
+                sb.setMouseOver(true);
+            }
+        }
+
     }
 
     @Override

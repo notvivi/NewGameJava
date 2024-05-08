@@ -12,7 +12,7 @@ public class StartButton {
     private int yPosition;
     private int rowIndex;
     private int index = 0;
-    private int xOffSetCenter = Constants.Ui.Buttons.BUTTON_WIDTH_DEFAULT / 2;
+    private int xOffSetCenter = Constants.Ui.Buttons.CIRCLE_BUTTON_WIDTH_DEFAULT;
     private boolean mouseOver;
     private boolean mousePressed;
     public Rectangle buttonHitBox;
@@ -28,32 +28,30 @@ public class StartButton {
         isInHitBox();
     }
     private void isInHitBox() {
-        buttonHitBox = new Rectangle(xPosition - xOffSetCenter,yPosition, Constants.Ui.Buttons.BUTTON_WIDTH, Constants.Ui.Buttons.BUTTON_HEIGHT);
+        buttonHitBox = new Rectangle(xPosition - xOffSetCenter,yPosition, Constants.Ui.Buttons.CIRCLE_BUTTON_WIDTH, Constants.Ui.Buttons.CIRCLE_BUTTON_HEIGHT);
     }
 
 
     private void loadImages(){
-        images = new BufferedImage[3];
+        images = new BufferedImage[2];
         BufferedImage temp = LoadSave.getSpriteAtlas(LoadSave.START_BUTTON);
-        images[0] = temp;
+        for(int i = 0; i < images.length;i++){
+            images[i] = temp.getSubimage(i * Constants.Ui.Buttons.CIRCLE_BUTTON_WIDTH_DEFAULT,rowIndex * Constants.Ui.Buttons.CIRCLE_BUTTON_HEIGHT_DEFAULT, Constants.Ui.Buttons.CIRCLE_BUTTON_WIDTH_DEFAULT, Constants.Ui.Buttons.CIRCLE_BUTTON_HEIGHT_DEFAULT);
+        }
 
     }
 
     public void draw(Graphics g){
- //       update();
-        g.drawImage(images[index],xPosition - xOffSetCenter,yPosition, Constants.Ui.Buttons.BUTTON_WIDTH, Constants.Ui.Buttons.BUTTON_HEIGHT,null);
+        update();
+        g.drawImage(images[index],xPosition - xOffSetCenter,yPosition, Constants.Ui.Buttons.CIRCLE_BUTTON_WIDTH, Constants.Ui.Buttons.CIRCLE_BUTTON_HEIGHT,null);
     }
 
-   // public void update(){
-   //     index = 0;
-    //    if(mouseOver){
-     //       index = 1;
-    //    }
-    //    if(mousePressed) {
-    //        index = 2;
-     //   }
-
-  //  }
+  public void update(){
+        index = 0;
+        if(mouseOver){
+            index = 1;
+        }
+    }
 
     public void setGameState(){
         GameState.state = gameState;
