@@ -11,7 +11,7 @@ import java.awt.image.BufferedImage;
 
 public class Menu extends State implements MethodsForStates {
 
-    private MenuButton[] menuButtons = new MenuButton[3];
+    private MenuButton[] menuButtons = new MenuButton[2];
 
     private BufferedImage backgroundMenuImage;
     private int menuX;
@@ -38,7 +38,6 @@ public class Menu extends State implements MethodsForStates {
     private void loadButtons() {
         menuButtons[0] = new MenuButton((int) (Game.GAME_WIDTH / 2.2),(int) (150 * Game.SCALE), 0, GameState.PLAYING);
         menuButtons[1] = new MenuButton((int) (Game.GAME_WIDTH / 2.2),(int) (220 * Game.SCALE), 1, GameState.OPTIONS);
-        menuButtons[2] = new MenuButton((int) (Game.GAME_WIDTH / 2.2),(int) (290 * Game.SCALE), 2, GameState.QUIT);
     }
 
     @Override
@@ -107,6 +106,8 @@ public class Menu extends State implements MethodsForStates {
     public void keyPressed(KeyEvent keyEvent) {
         if(keyEvent.getKeyCode() == KeyEvent.VK_ENTER){
             GameState.state = GameState.PLAYING;
+        }else if (keyEvent.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
+            GameState.state = GameState.START;
         }
     }
 
