@@ -3,6 +3,7 @@ package main;
 import gamestates.GameState;
 import gamestates.Playing;
 import gamestates.Menu;
+import gamestates.Start;
 
 import java.awt.*;
 
@@ -16,6 +17,7 @@ public class Game implements Runnable {
 
     private Playing playing;
     private Menu menu;
+    private Start start;
 
     public final static int TILE_SIZE_DEFAULT = 32;
     public final static float SCALE = 2f;
@@ -34,6 +36,7 @@ public class Game implements Runnable {
     }
 
     private void initClasses() {
+        start = new Start(this);
         menu = new Menu(this);
         playing = new Playing(this);
     }
@@ -45,6 +48,9 @@ public class Game implements Runnable {
 
     public void update(){
         switch (GameState.state){
+            case START:
+                start.update();
+                break;
             case MENU:
                 menu.update();
                 break;
@@ -63,6 +69,9 @@ public class Game implements Runnable {
     }
     public void render(Graphics g){
         switch (GameState.state){
+            case START:
+                start.draw(g);
+                break;
             case MENU:
                 menu.draw(g);
                 break;
@@ -129,4 +138,7 @@ public class Game implements Runnable {
         return menu;
     }
 
+    public Start getStart() {
+        return start;
+    }
 }
