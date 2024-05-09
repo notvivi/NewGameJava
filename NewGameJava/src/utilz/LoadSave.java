@@ -22,6 +22,9 @@ public class LoadSave {
     public static final String BIG_CLOUDS = "res/big_clouds.png";
     public static final String SMALL_CLOUD = "res/small_clouds.png";
     public static final String ICON = "res/pikachu_icon.png";
+    public static final String MENU_POKEDEX_2 = "res/menu_background_pokedex_2.png";
+    public static final String POKEMON_TITLE = "res/pokemon_title.png";
+    public static final String ENEMY_CRAB_ATLAS = "res/crabby_sprite.png";
 
 
 
