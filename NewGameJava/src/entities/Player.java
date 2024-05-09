@@ -53,7 +53,7 @@ public class Player extends Entity {
         if(aniTick >= aniSpeed){
             aniTick = 0;
             aniIndex++;
-            if(aniIndex >= GetSpriteAmount(playerAction)){
+            if(aniIndex >= getSpriteAmount(playerAction)){
                 aniIndex = 0;
                 attacking = false;
             }
@@ -155,7 +155,6 @@ public class Player extends Entity {
     }
 
     private void loadAnimations() {
-        InputStream is = getClass().getResourceAsStream("/res/player_sprites.png");
             BufferedImage img = LoadSave.getSpriteAtlas(LoadSave.PLAYER_ATLAS);
             animations = new BufferedImage[9][6];
             for (int j = 0;j < animations.length;j++){
