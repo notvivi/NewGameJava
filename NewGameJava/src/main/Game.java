@@ -4,6 +4,7 @@ import gamestates.GameState;
 import gamestates.Playing;
 import gamestates.Menu;
 import gamestates.Start;
+import levels.SoundPlayer;
 
 import java.awt.*;
 
@@ -18,6 +19,7 @@ public class Game implements Runnable {
     private Playing playing;
     private Menu menu;
     private Start start;
+    private SoundPlayer soundPlayer = new SoundPlayer();
 
     public final static int TILE_SIZE_DEFAULT = 32;
     public final static float SCALE = 2f;
@@ -58,7 +60,6 @@ public class Game implements Runnable {
                 playing.update();
                 break;
             case OPTIONS:
-                System.out.println("Options are not here yet.");
                 break;
             case QUIT:
                 System.exit(0);
@@ -117,7 +118,6 @@ public class Game implements Runnable {
             }
             if(System.currentTimeMillis() - lastCheck >= 1000) {
                 lastCheck = System.currentTimeMillis();
-                System.out.println("FPS" + frames + "UPS" + updates);
                 frames = 0;
                 updates = 0;
             }
