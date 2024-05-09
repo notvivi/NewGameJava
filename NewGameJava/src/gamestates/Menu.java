@@ -14,6 +14,8 @@ public class Menu extends State implements MethodsForStates {
     private MenuButton[] menuButtons = new MenuButton[2];
 
     private BufferedImage backgroundMenuImage;
+    private final BufferedImage backgroundPikachuImage;
+    private final BufferedImage pokemonTitleImage;
     private int menuX;
     private int menuY;
     private int menuWidth;
@@ -24,10 +26,12 @@ public class Menu extends State implements MethodsForStates {
         super(game);
         loadButtons();
         loadMenuBackground();
+        backgroundPikachuImage = LoadSave.getSpriteAtlas(LoadSave.PIKACHU_MENU_BACKGROUND);
+        pokemonTitleImage = LoadSave.getSpriteAtlas(LoadSave.POKEMON_TITLE);
     }
 
     private void loadMenuBackground() {
-        backgroundMenuImage = LoadSave.getSpriteAtlas(LoadSave.MENU_BACKGROUND);
+        backgroundMenuImage = LoadSave.getSpriteAtlas(LoadSave.MENU_POKEDEX_2);
         menuWidth = (int) (backgroundMenuImage.getWidth() * Game.SCALE);
         menuHeight = (int) (backgroundMenuImage.getHeight() * Game.SCALE);
         menuX = (int) ((int) (Game.GAME_WIDTH / 2) - menuWidth / 2);
@@ -49,6 +53,8 @@ public class Menu extends State implements MethodsForStates {
 
     @Override
     public void draw(Graphics g) {
+        g.drawImage(backgroundPikachuImage,0,0,Game.GAME_WIDTH,Game.GAME_HEIGHT,null);
+        g.drawImage(pokemonTitleImage,0,0,Game.GAME_WIDTH,200,null);
         g.drawImage(backgroundMenuImage, menuX,menuY,menuWidth,menuHeight,null);
         for(MenuButton mb: menuButtons){
             mb.draw(g);
@@ -104,9 +110,7 @@ public class Menu extends State implements MethodsForStates {
 
     @Override
     public void keyPressed(KeyEvent keyEvent) {
-        if(keyEvent.getKeyCode() == KeyEvent.VK_ENTER){
-            GameState.state = GameState.PLAYING;
-        }else if (keyEvent.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
+        if (keyEvent.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
             GameState.state = GameState.START;
         }
     }

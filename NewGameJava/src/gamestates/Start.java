@@ -13,6 +13,7 @@ public class Start extends State implements MethodsForStates{
     private final StartButton[] startButtons = new StartButton[1];
     private BufferedImage backgroundImage;
     private final BufferedImage backgroundPikachuImage;
+    private final BufferedImage pokemonTitleImage;
     private int startMenuX;
     private int startMenuY;
     private int startMenuWidth;
@@ -23,6 +24,7 @@ public class Start extends State implements MethodsForStates{
         loadButton();
         loadStartMenuBackground();
         backgroundPikachuImage = LoadSave.getSpriteAtlas(LoadSave.PIKACHU_MENU_BACKGROUND);
+        pokemonTitleImage = LoadSave.getSpriteAtlas(LoadSave.POKEMON_TITLE);
     }
 
     private void loadStartMenuBackground() {
@@ -49,6 +51,7 @@ public class Start extends State implements MethodsForStates{
     @Override
     public void draw(Graphics g) {
         g.drawImage(backgroundPikachuImage,0,0,Game.GAME_WIDTH,Game.GAME_HEIGHT,null);
+        g.drawImage(pokemonTitleImage,0,0,Game.GAME_WIDTH,200,null);
         g.drawImage(backgroundImage, startMenuX, startMenuY, startMenuWidth, startMenuHeight,null);
         for(StartButton sb: startButtons){
             sb.draw(g);
@@ -106,9 +109,6 @@ public class Start extends State implements MethodsForStates{
 
     @Override
     public void keyPressed(KeyEvent keyEvent) {
-        if(keyEvent.getKeyCode() == KeyEvent.VK_ENTER){
-            GameState.state = GameState.MENU;
-        }
     }
 
     @Override
