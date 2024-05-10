@@ -15,6 +15,7 @@ public class GameWindow {
         load();
        jframe = new JFrame();
 
+       jframe.setTitle("Pokemon by Vivi");
        jframe.setIconImage(iconImage);
        jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        jframe.add(gamePanel);
