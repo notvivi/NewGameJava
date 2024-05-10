@@ -30,6 +30,7 @@ public class Game implements Runnable {
     public final static int GAME_HEIGHT = TILES_SIZE* TILES_IN_HEIGHT;
 
     public Game(){
+        playSong();
         initClasses();
         gamePanel = new GamePanel(this);
         gameWindow = new GameWindow(gamePanel);
@@ -128,6 +129,12 @@ public class Game implements Runnable {
         if((GameState.state == GameState.PLAYING)){
             playing.getPlayer().resetDirectionBooleans();
         }
+    }
+
+    public void playSong(){
+        soundPlayer.setFile();
+        soundPlayer.play();
+        soundPlayer.loop();
     }
 
     public Playing getPlaying() {
