@@ -6,7 +6,6 @@ public class Constants {
 
     public static class EnemyConstants{
         public static final int CRABBY = 0;
-
         public static final int IDLE = 0;
         public static final int RUNNING = 1;
         public static final int ATTACK = 2;
@@ -18,6 +17,9 @@ public class Constants {
 
         public static final int CRABBY_WIDTH = (int)(CRABBY_WIDTH_DEFAULT * Game.SCALE);
         public static final int CRABBY_HEIGHT = (int)(CRABBY_HEIGHT_DEFAULT * Game.SCALE);
+
+        public static final int CRABBY_OFFSET_X = (int)(26 * Game.SCALE);
+        public static final int CRABBY_OFFSET_Y = (int)(9 * Game.SCALE);
 
         public static int getSpriteAmount(int enemyType, int enemyState){
             switch (enemyType){
@@ -39,6 +41,12 @@ public class Constants {
          return 0;
         }
 
+    }
+    public static class Directions{
+        public static final int LEFT = 0;
+        public static final int UP = 1;
+        public static final int RIGHT = 2;
+        public static final int DOWN = 3;
     }
     public static class Environment {
         public static final int BIG_CLOUDS_WIDTH_DEFAULT = 448;
