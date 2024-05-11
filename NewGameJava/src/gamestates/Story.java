@@ -1,7 +1,7 @@
 package gamestates;
 
 import main.Game;
-import ui.MenuButton;
+import ui.StoryButton;
 import utilz.LoadSave;
 
 import java.awt.*;
@@ -9,10 +9,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
-public class Menu extends State implements MethodsForStates {
-
-    private MenuButton[] menuButtons = new MenuButton[2];
-
+public class Story extends State implements MethodsForStates {
+    private StoryButton[] storyButtons = new StoryButton[1];
     private BufferedImage backgroundMenuImage;
     private final BufferedImage backgroundPikachuImage;
     private final BufferedImage pokemonTitleImage;
@@ -21,15 +19,13 @@ public class Menu extends State implements MethodsForStates {
     private int menuWidth;
     private int menuHeight;
 
-
-    public Menu(Game game) {
+    public Story(Game game) {
         super(game);
         loadButtons();
         loadMenuBackground();
         backgroundPikachuImage = LoadSave.getSpriteAtlas(LoadSave.PIKACHU_MENU_BACKGROUND);
         pokemonTitleImage = LoadSave.getSpriteAtlas(LoadSave.POKEMON_TITLE);
     }
-
     private void loadMenuBackground() {
         backgroundMenuImage = LoadSave.getSpriteAtlas(LoadSave.MENU_POKEDEX_2);
         menuWidth = (int) (backgroundMenuImage.getWidth() * Game.SCALE);
@@ -38,16 +34,15 @@ public class Menu extends State implements MethodsForStates {
         menuY = (int) (45 * Game.SCALE);
 
     }
-
     private void loadButtons() {
-        menuButtons[0] = new MenuButton((int) (Game.GAME_WIDTH / 2.2),(int) (150 * Game.SCALE), 0, GameState.STORY);
-        menuButtons[1] = new MenuButton((int) (Game.GAME_WIDTH / 2.2),(int) (220 * Game.SCALE), 1, GameState.OPTIONS);
+        storyButtons[0] = new StoryButton((int) (Game.GAME_WIDTH / 2),(int) (150 * Game.SCALE), 0, GameState.PLAYING);
     }
+
 
     @Override
     public void update() {
-        for(MenuButton mb: menuButtons){
-            mb.update();
+        for(StoryButton sb: storyButtons){
+            sb.update();
         }
     }
 
@@ -56,8 +51,8 @@ public class Menu extends State implements MethodsForStates {
         g.drawImage(backgroundPikachuImage,0,0,Game.GAME_WIDTH,Game.GAME_HEIGHT,null);
         g.drawImage(pokemonTitleImage,0,0,Game.GAME_WIDTH,200,null);
         g.drawImage(backgroundMenuImage, menuX,menuY,menuWidth,menuHeight,null);
-        for(MenuButton mb: menuButtons){
-            mb.draw(g);
+        for(StoryButton sb: storyButtons){
+            sb.draw(g);
         }
     }
 
@@ -68,9 +63,9 @@ public class Menu extends State implements MethodsForStates {
 
     @Override
     public void mousePressed(MouseEvent mouseEvent) {
-        for(MenuButton menuButtons: menuButtons){
-            if(isInButtonMenu(mouseEvent,menuButtons)){
-                menuButtons.setMousePressed(true);
+        for(StoryButton sb: storyButtons){
+            if(isInButtonStory(mouseEvent,sb)){
+                sb.setMousePressed(true);
                 break;
             }
         }
@@ -78,31 +73,30 @@ public class Menu extends State implements MethodsForStates {
 
     @Override
     public void mouseReleased(MouseEvent mouseEvent) {
-        for(MenuButton menuBtn: menuButtons){
-            if(isInButtonMenu(mouseEvent,menuBtn)){
-                if(menuBtn.isMousePressed()){
-                    menuBtn.setGameState();
+        for(StoryButton sb: storyButtons){
+            if(isInButtonStory(mouseEvent,sb)){
+                if(sb.isMousePressed()){
+                    sb.setGameState();
                     break;
                 }
             }
         }
         resetButtons();
     }
-
     private void resetButtons() {
-        for(MenuButton menuBtn: menuButtons){
-            menuBtn.resetBooleans();
+        for(StoryButton sb: storyButtons){
+            sb.resetBooleans();
         }
     }
 
     @Override
     public void mouseMoved(MouseEvent mouseEvent) {
-        for(MenuButton menuBtn: menuButtons){
-            menuBtn.setMouseOver(false);
+        for(StoryButton sb: storyButtons){
+            sb.setMouseOver(false);
         }
-        for(MenuButton menuBtn: menuButtons){
-            if(isInButtonMenu(mouseEvent,menuBtn)){
-                menuBtn.setMouseOver(true);
+        for(StoryButton sb: storyButtons){
+            if(isInButtonStory(mouseEvent,sb)){
+                sb.setMouseOver(true);
                 break;
             }
         }
@@ -111,7 +105,7 @@ public class Menu extends State implements MethodsForStates {
     @Override
     public void keyPressed(KeyEvent keyEvent) {
         if (keyEvent.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
-            GameState.state = GameState.START;
+            GameState.state = GameState.MENU;
         }
     }
 

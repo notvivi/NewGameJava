@@ -1,9 +1,7 @@
 package main;
 
-import gamestates.GameState;
-import gamestates.Playing;
+import gamestates.*;
 import gamestates.Menu;
-import gamestates.Start;
 import levels.SoundPlayer;
 
 import java.awt.*;
@@ -19,6 +17,7 @@ public class Game implements Runnable {
     private Playing playing;
     private Menu menu;
     private Start start;
+    private Story story;
     private SoundPlayer soundPlayer = new SoundPlayer();
 
     public final static int TILE_SIZE_DEFAULT = 32;
@@ -41,6 +40,7 @@ public class Game implements Runnable {
     private void initClasses() {
         start = new Start(this);
         menu = new Menu(this);
+        story = new Story(this);
         playing = new Playing(this);
     }
 
@@ -56,6 +56,9 @@ public class Game implements Runnable {
                 break;
             case MENU:
                 menu.update();
+                break;
+            case STORY:
+                story.update();
                 break;
             case PLAYING:
                 playing.update();
@@ -76,6 +79,9 @@ public class Game implements Runnable {
                 break;
             case MENU:
                 menu.draw(g);
+                break;
+            case STORY:
+                story.draw(g);
                 break;
             case PLAYING:
                 playing.draw(g);
@@ -147,5 +153,8 @@ public class Game implements Runnable {
 
     public Start getStart() {
         return start;
+    }
+    public Story getStory(){
+        return story;
     }
 }
