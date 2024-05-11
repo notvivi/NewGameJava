@@ -1,5 +1,6 @@
 package gamestates;
 
+import entities.EnemyManager;
 import entities.Player;
 import levels.LevelManager;
 import main.Game;
@@ -18,6 +19,7 @@ public class Playing extends State implements MethodsForStates{
 
     private LevelManager levelManager;
     private Player player;
+    private EnemyManager enemyManager;
 
     private int xLevelOffSet = 0;
     private final int leftBorder = (int) (0.2 * Game.GAME_WIDTH);
@@ -48,6 +50,7 @@ public class Playing extends State implements MethodsForStates{
 
     private void initClasses(Game game) {
         levelManager = new LevelManager(game);
+        enemyManager = new EnemyManager(this);
         player = new Player(200,200,(int)(64 * Game.SCALE),(int)(40 * Game.SCALE));
         player.loadLevelData(levelManager.getCurrentLevel().getLevelData());
 
@@ -65,6 +68,7 @@ public class Playing extends State implements MethodsForStates{
     public void update() {
         levelManager.update();
         player.update();
+        enemyManager.update(levelManager.getCurrentLevel().getLevelData());
         checkCloseToBorder();
     }
 
@@ -92,6 +96,7 @@ public class Playing extends State implements MethodsForStates{
     public void draw(Graphics g) {
         g.drawImage(backgroundLevel,0,0,Game.GAME_WIDTH,Game.GAME_HEIGHT,null);
         drawClouds(g);
+        enemyManager.draw(g, xLevelOffSet);
         levelManager.draw(g,xLevelOffSet);
         player.render(g,xLevelOffSet);
     }
