@@ -62,10 +62,14 @@ public class SpecialHelpMethods {
 
     public static boolean isEntityOnMap(Rectangle2D.Float hitBox, int[][]levelData){
         if(!isTile(hitBox.x,hitBox.y + hitBox.height + 1, levelData)){
-            if(!isTile(hitBox.x,hitBox.y + hitBox.width + 1, levelData)){
+            if(!isTile(hitBox.x + hitBox.width,hitBox.y + hitBox.height + 1, levelData)){
                 return false;
             }
         }
         return true;
+    }
+
+    public static boolean isFloor(Rectangle2D.Float hitBox, float xSpeed, int[][] levelData){
+       return isTile(hitBox.x + xSpeed, hitBox.y + hitBox.height + 1, levelData);
     }
 }
