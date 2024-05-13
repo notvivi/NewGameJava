@@ -1,5 +1,6 @@
 package gamestates;
 
+import inputs.TextReader;
 import main.Game;
 import ui.StoryButton;
 import utilz.LoadSave;
@@ -8,35 +9,25 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class Story extends State implements MethodsForStates {
+    private TextReader textReader = new TextReader();
     private StoryButton[] storyButtons = new StoryButton[1];
-    private BufferedImage backgroundMenuImage;
-    private final BufferedImage backgroundPikachuImage;
-    private final BufferedImage pokemonTitleImage;
-    private int menuX;
-    private int menuY;
-    private int menuWidth;
-    private int menuHeight;
+    private final BufferedImage storyBackground;
+    private Font monospacedBold = new Font(Font.MONOSPACED, Font.BOLD, 25);
 
     public Story(Game game) {
         super(game);
         loadButtons();
-        loadMenuBackground();
-        backgroundPikachuImage = LoadSave.getSpriteAtlas(LoadSave.PIKACHU_MENU_BACKGROUND);
-        pokemonTitleImage = LoadSave.getSpriteAtlas(LoadSave.POKEMON_TITLE);
+        loadArraylist();
+        storyBackground = LoadSave.getSpriteAtlas(LoadSave.STORY_BACKGROUND);
     }
-    private void loadMenuBackground() {
-        backgroundMenuImage = LoadSave.getSpriteAtlas(LoadSave.MENU_POKEDEX_2);
-        menuWidth = (int) (backgroundMenuImage.getWidth() * Game.SCALE);
-        menuHeight = (int) (backgroundMenuImage.getHeight() * Game.SCALE);
-        menuX = (int) ((int) (Game.GAME_WIDTH / 2) - menuWidth / 2);
-        menuY = (int) (45 * Game.SCALE);
 
-    }
     private void loadButtons() {
-        storyButtons[0] = new StoryButton((int) (Game.GAME_WIDTH / 2),(int) (150 * Game.SCALE), 0, GameState.PLAYING);
+        storyButtons[0] = new StoryButton((int) (Game.GAME_WIDTH / 1.94),(int) (300 * Game.SCALE), 0, GameState.PLAYING);
     }
+
 
 
     @Override
@@ -46,11 +37,21 @@ public class Story extends State implements MethodsForStates {
         }
     }
 
+    public ArrayList<String> loadArraylist(){
+        textReader.read();
+        return textReader.sentences;
+    }
+
     @Override
     public void draw(Graphics g) {
-        g.drawImage(backgroundPikachuImage,0,0,Game.GAME_WIDTH,Game.GAME_HEIGHT,null);
-        g.drawImage(pokemonTitleImage,0,0,Game.GAME_WIDTH,200,null);
-        g.drawImage(backgroundMenuImage, menuX,menuY,menuWidth,menuHeight,null);
+        g.drawImage(storyBackground,0,0,Game.GAME_WIDTH,Game.GAME_HEIGHT,null);
+        g.setFont(monospacedBold);
+        FontMetrics fm = g.getFontMetrics(g.getFont());
+
+        for(int i = 0; i < textReader.sentences.size();i++){
+            g.drawString(textReader.sentences.get(i), 30, i*(fm.getAscent()+fm.getDescent()) + 100);
+        }
+
         for(StoryButton sb: storyButtons){
             sb.draw(g);
         }

@@ -1,5 +1,6 @@
 package main;
 
+import inputs.TextReader;
 import utilz.LoadSave;
 
 import javax.swing.*;
@@ -7,12 +8,12 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
 import java.awt.image.BufferedImage;
 
-public class GameWindow {
+public class GameWindow extends JFrame {
     private JFrame jframe;
     private BufferedImage iconImage;
 
     public GameWindow(GamePanel gamePanel){
-        load();
+       load();
        jframe = new JFrame();
 
        jframe.setTitle("Pokemon by Vivi");
@@ -40,5 +41,4 @@ public class GameWindow {
     public void load(){
         iconImage = LoadSave.getSpriteAtlas(LoadSave.ICON);
     }
-
 }
