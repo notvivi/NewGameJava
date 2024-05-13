@@ -1,6 +1,5 @@
 package main;
 
-import inputs.TextReader;
 import utilz.LoadSave;
 
 import javax.swing.*;
