@@ -68,7 +68,7 @@ public class Playing extends State implements MethodsForStates{
     public void update() {
         levelManager.update();
         player.update();
-        enemyManager.update(levelManager.getCurrentLevel().getLevelData());
+        enemyManager.update(levelManager.getCurrentLevel().getLevelData(), player);
         checkCloseToBorder();
     }
 

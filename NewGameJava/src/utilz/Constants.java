@@ -19,7 +19,7 @@ public class Constants {
         public static final int CRABBY_HEIGHT = (int)(CRABBY_HEIGHT_DEFAULT * Game.SCALE);
 
         public static final int CRABBY_OFFSET_X = (int)(26 * Game.SCALE);
-        public static final int CRABBY_OFFSET_Y = (int)(9 * Game.SCALE);
+        public static final int CRABBY_OFFSET_Y = (int)(- 9 * Game.SCALE);
 
         public static int getSpriteAmount(int enemyType, int enemyState){
             switch (enemyType){

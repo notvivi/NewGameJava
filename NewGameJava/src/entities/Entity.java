@@ -17,14 +17,17 @@ public abstract class Entity {
         initHitBox(x, y, width, height);
     }
     public void initHitBox(float x, float y, int width, int height){
-        hitBox = new Rectangle2D.Float((int) x, (int) y,width,height);
+        hitBox = new Rectangle2D.Float(x, y,width,height);
     }
 
+    public void drawHitBox(Graphics g,int xLevelOffSet){
+        g.setColor(Color.pink);
+        g.drawRect( (int) (hitBox.x - xLevelOffSet), (int) hitBox.y, (int) hitBox.width, (int) hitBox.height);
+
+    }
+    
     public Rectangle2D.Float getHitBox() {
         return hitBox;
     }
-
-    public void setHitBox(Rectangle2D.Float hitBox) {
-        this.hitBox = hitBox;
-    }
+    
 }

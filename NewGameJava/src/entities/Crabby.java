@@ -2,59 +2,43 @@ package entities;
 
 import main.Game;
 
-import static utilz.Constants.Directions.LEFT;
 import static utilz.Constants.EnemyConstants.*;
-import static utilz.SpecialHelpMethods.*;
 
 public class Crabby extends Enemy {
 
 
     public Crabby(float x, float y) {
         super(x, y, CRABBY_WIDTH, CRABBY_HEIGHT, CRABBY );
-        initHitBox(x,y,(int)(22 * Game.SCALE), (int) (27 * Game.SCALE));
+        initHitBox(x,y,(int)(22 * Game.SCALE), (int) (19 * Game.SCALE));
     }
-    private void updateMoving(int [][] levelData){
-        if(firstUpdate){
-            if(!isEntityOnMap(hitBox,levelData)){
-                enemyInAir = true;
-                firstUpdate = false;
-            }
-        }
 
+    private void updateMoving(int [][] levelData, Player player){
+        if(firstUpdate){
+            firstUpdateCheck(levelData);
+        }
         if(enemyInAir){
-            if(canMoveThere(hitBox.x,hitBox.y + fallSpeed,hitBox.width,hitBox.height,levelData)){
-                hitBox.y += fallSpeed;
-                fallSpeed += gravity;
-            }else {
-                enemyInAir = false;
-                hitBox.y = getEntityYPositionInLevel(hitBox, fallSpeed);
-            }
+            updateEnemyInAir(levelData);
         }else{
             switch (enemyState){
                 case IDLE:
-                    enemyState = RUNNING;
+                    newState(RUNNING);
                     break;
                 case RUNNING:
-                    float xSpeed = 0;
-                    if(walkingDirection == LEFT){
-                        xSpeed = -walkSpeed;
-                    } else{
-                        xSpeed = walkSpeed;
+                    if(canSeePlayer(levelData,player)){
+                        chasePlayer(player);
                     }
-                    if(canMoveThere(hitBox.x + xSpeed,hitBox.y,hitBox.width,hitBox.height,levelData)){
-                        if(isFloor(hitBox,xSpeed,levelData)){
-                            hitBox.x += xSpeed;
-                            return;
-                        }
+                    if (isPlayerCloseForAttack(player)) {
+                       newState(ATTACK);
                     }
+                   move(levelData);
+                   break;
 
-                    changeWalkDirection();
-                    break;
             }
         }
     }
-    public void update(int [][] levelData){
-        updateMoving(levelData);
+
+    public void update(int [][] levelData, Player player){
+        updateMoving(levelData, player);
         updateAnimationTick();
 
     }

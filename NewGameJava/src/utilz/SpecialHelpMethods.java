@@ -29,13 +29,37 @@ public class SpecialHelpMethods {
         float xIndex = x / Game.TILES_SIZE;
         float yIndex = y / Game.TILES_SIZE;
 
-        int value = levelData[(int) yIndex][(int) xIndex];
+        return isTileSolid((int) xIndex, (int) yIndex,levelData);
 
+    }
+    public static boolean isTileSolid(int xTile, int yTile, int[][] levelData){
+        int value = levelData[yTile][xTile];
         if(value >= 48 || value < 0 || value != 11){
             return true;
         }
         return false;
 
+    }
+    public static boolean isAllTiles(int xStart, int xEnd, int y, int[][] levelData){
+        for(int i = 0; i < (xEnd - xStart);i++){
+            if(isTileSolid(xStart + i,y,levelData)){
+                return false;
+            }
+            if(!isTileSolid(xStart + i,y + 1,levelData)){
+                return false;
+            }
+        }
+        return true;
+    }
+    public static boolean isSightClear(int[][] levelData, Rectangle2D.Float firstHitBox, Rectangle2D.Float secondHitBox, int tileY) {
+        int firstXTile = (int) (firstHitBox.x / Game.TILES_SIZE);
+        int secondXTile = (int) (secondHitBox.x / Game.TILES_SIZE);
+
+        if(firstXTile > secondXTile){
+             return isAllTiles(secondXTile,firstXTile,tileY,levelData);
+        }else{
+            return isAllTiles(firstXTile,secondXTile,tileY,levelData);
+        }
     }
 
     public static float getEntityXPositionNextToWall(Rectangle2D.Float hitBox, float xSpeed){
