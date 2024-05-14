@@ -1,5 +1,6 @@
 package gamestates;
 
+import inputs.TextReader;
 import main.Game;
 import ui.MenuButton;
 import utilz.LoadSave;
@@ -11,7 +12,9 @@ import java.awt.image.BufferedImage;
 
 public class Menu extends State implements MethodsForStates {
 
+    private TextReader textReader = new TextReader();
     private MenuButton[] menuButtons = new MenuButton[2];
+    private Font monospacedBold = new Font(Font.MONOSPACED, Font.BOLD, 25);
 
     private BufferedImage backgroundMenuImage;
     private final BufferedImage backgroundPikachuImage;
@@ -26,6 +29,7 @@ public class Menu extends State implements MethodsForStates {
         super(game);
         loadButtons();
         loadMenuBackground();
+        loadArraylist();
         backgroundPikachuImage = LoadSave.getSpriteAtlas(LoadSave.PIKACHU_MENU_BACKGROUND);
         pokemonTitleImage = LoadSave.getSpriteAtlas(LoadSave.POKEMON_TITLE);
     }
@@ -50,12 +54,23 @@ public class Menu extends State implements MethodsForStates {
             mb.update();
         }
     }
+    public void loadArraylist(){
+        textReader.read(textReader.getFUTURE_PLANS());
+    }
 
     @Override
     public void draw(Graphics g) {
         g.drawImage(backgroundPikachuImage,0,0,Game.GAME_WIDTH,Game.GAME_HEIGHT,null);
         g.drawImage(pokemonTitleImage,0,0,Game.GAME_WIDTH,200,null);
         g.drawImage(backgroundMenuImage, menuX,menuY,menuWidth,menuHeight,null);
+
+        g.setFont(monospacedBold);
+        FontMetrics fm = g.getFontMetrics(g.getFont());
+
+        for(int i = 0; i < textReader.getFuturePlans().size();i++){
+            g.drawString(textReader.getFuturePlans().get(i), 30, i*(fm.getAscent()+fm.getDescent()) + 400);
+        }
+
         for(MenuButton mb: menuButtons){
             mb.draw(g);
         }

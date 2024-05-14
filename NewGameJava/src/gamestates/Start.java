@@ -1,5 +1,6 @@
 package gamestates;
 
+import inputs.TextReader;
 import main.Game;
 import ui.StartButton;
 import utilz.LoadSave;
@@ -10,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
 public class Start extends State implements MethodsForStates{
+    private TextReader textReader = new TextReader();
     private final StartButton[] startButtons = new StartButton[1];
     private BufferedImage backgroundImage;
     private final BufferedImage backgroundPikachuImage;
@@ -18,11 +20,13 @@ public class Start extends State implements MethodsForStates{
     private int startMenuY;
     private int startMenuWidth;
     private int startMenuHeight;
+    private Font monospacedBold = new Font(Font.MONOSPACED, Font.BOLD, 25);
 
     public Start(Game game) {
         super(game);
         loadButton();
         loadStartMenuBackground();
+        loadArraylist();
         backgroundPikachuImage = LoadSave.getSpriteAtlas(LoadSave.PIKACHU_MENU_BACKGROUND);
         pokemonTitleImage = LoadSave.getSpriteAtlas(LoadSave.POKEMON_TITLE);
     }
@@ -47,12 +51,24 @@ public class Start extends State implements MethodsForStates{
        }
 
      }
+     public void loadArraylist(){
+        textReader.read(textReader.getCREDITS());
+     }
 
     @Override
     public void draw(Graphics g) {
         g.drawImage(backgroundPikachuImage,0,0,Game.GAME_WIDTH,Game.GAME_HEIGHT,null);
         g.drawImage(pokemonTitleImage,0,0,Game.GAME_WIDTH,200,null);
         g.drawImage(backgroundImage, startMenuX, startMenuY, startMenuWidth, startMenuHeight,null);
+
+        g.setFont(monospacedBold);
+        FontMetrics fm = g.getFontMetrics(g.getFont());
+
+       for(int i = 0; i < textReader.getCredits().size();i++){
+            g.drawString(textReader.getCredits().get(i), 30, i*(fm.getAscent()+fm.getDescent()) + 300);
+       }
+
+
         for(StartButton sb: startButtons){
             sb.draw(g);
         }

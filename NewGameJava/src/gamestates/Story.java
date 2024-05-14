@@ -9,7 +9,6 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
 public class Story extends State implements MethodsForStates {
     private TextReader textReader = new TextReader();
@@ -37,10 +36,10 @@ public class Story extends State implements MethodsForStates {
         }
     }
 
-    public ArrayList<String> loadArraylist(){
-        textReader.read();
-        return textReader.sentences;
+    public void loadArraylist(){
+        textReader.read(textReader.getSTORY());
     }
+
 
     @Override
     public void draw(Graphics g) {
@@ -48,8 +47,8 @@ public class Story extends State implements MethodsForStates {
         g.setFont(monospacedBold);
         FontMetrics fm = g.getFontMetrics(g.getFont());
 
-        for(int i = 0; i < textReader.sentences.size();i++){
-            g.drawString(textReader.sentences.get(i), 30, i*(fm.getAscent()+fm.getDescent()) + 100);
+        for(int i = 0; i < textReader.getSentences().size();i++){
+            g.drawString(textReader.getSentences().get(i), 30, i*(fm.getAscent()+fm.getDescent()) + 100);
         }
 
         for(StoryButton sb: storyButtons){
