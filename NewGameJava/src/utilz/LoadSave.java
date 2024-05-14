@@ -1,6 +1,6 @@
 package utilz;
 
-import entities.Crabby;
+import entities.Pikachu;
 import main.Game;
 
 import javax.imageio.ImageIO;
@@ -26,7 +26,7 @@ public class LoadSave {
     public static final String ICON = "res/pikachu_icon.png";
     public static final String MENU_POKEDEX_2 = "res/menu_background_pokedex_2.png";
     public static final String POKEMON_TITLE = "res/pokemon_title.png";
-    public static final String ENEMY_CRAB_ATLAS = "res/crabby_sprite.png";
+    public static final String ENEMY_PIKACHU_ATLAS = "pikachu_sprite.png";
     public static final String STORY_BACKGROUND = "res/story_background.png";
 
 
@@ -48,15 +48,15 @@ public class LoadSave {
         return image;
     }
 
-    public static ArrayList<Crabby> getCrabs(){
+    public static ArrayList<Pikachu> getCrabs(){
         BufferedImage image = getSpriteAtlas(LEVEL_ONE_DATA);
-        ArrayList<Crabby> crabbyList = new ArrayList<>();
+        ArrayList<Pikachu> crabbyList = new ArrayList<>();
         for(int i = 0; i < image.getHeight();i++){
             for(int j = 0;j < image.getWidth();j++){
                 Color color = new Color(image.getRGB(j,i));
                 int value = color.getGreen();
-                if(value == Constants.EnemyConstants.CRABBY){
-                   crabbyList.add(new Crabby(j * Game.TILES_SIZE, i * Game.TILES_SIZE));
+                if(value == Constants.EnemyConstants.PIKACHU){
+                   crabbyList.add(new Pikachu(j * Game.TILES_SIZE, i * Game.TILES_SIZE));
                 }
             }
         }

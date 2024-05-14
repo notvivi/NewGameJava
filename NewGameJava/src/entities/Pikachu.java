@@ -4,11 +4,11 @@ import main.Game;
 
 import static utilz.Constants.EnemyConstants.*;
 
-public class Crabby extends Enemy {
+public class Pikachu extends Enemy {
 
 
-    public Crabby(float x, float y) {
-        super(x, y, CRABBY_WIDTH, CRABBY_HEIGHT, CRABBY );
+    public Pikachu(float x, float y) {
+        super(x, y, PIKACHU_WIDTH, PIKACHU_HEIGHT, PIKACHU);
         initHitBox(x,y,(int)(22 * Game.SCALE), (int) (19 * Game.SCALE));
     }
 

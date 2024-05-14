@@ -5,25 +5,25 @@ import main.Game;
 public class Constants {
 
     public static class EnemyConstants{
-        public static final int CRABBY = 0;
+        public static final int PIKACHU = 0;
         public static final int IDLE = 0;
         public static final int RUNNING = 1;
         public static final int ATTACK = 2;
         public static final int HIT = 3;
         public static final int DEAD = 4;
 
-        public static final int CRABBY_WIDTH_DEFAULT = 72;
-        public static final int CRABBY_HEIGHT_DEFAULT = 32;
+        public static final int PIKACHU_WIDTH_DEFAULT = 72;
+        public static final int PIKACHU_HEIGHT_DEFAULT = 32;
 
-        public static final int CRABBY_WIDTH = (int)(CRABBY_WIDTH_DEFAULT * Game.SCALE);
-        public static final int CRABBY_HEIGHT = (int)(CRABBY_HEIGHT_DEFAULT * Game.SCALE);
+        public static final int PIKACHU_WIDTH = (int)(PIKACHU_WIDTH_DEFAULT * Game.SCALE);
+        public static final int PIKACHU_HEIGHT = (int)(PIKACHU_HEIGHT_DEFAULT * Game.SCALE);
 
-        public static final int CRABBY_OFFSET_X = (int)(26 * Game.SCALE);
-        public static final int CRABBY_OFFSET_Y = (int)(- 9 * Game.SCALE);
+        public static final int PIKACHU_OFFSET_X = (int)(26 * Game.SCALE);
+        public static final int PIKACHU_OFFSET_Y = (int)(- 9 * Game.SCALE);
 
         public static int getSpriteAmount(int enemyType, int enemyState){
             switch (enemyType){
-                case CRABBY:
+                case PIKACHU:
                     switch (enemyState){
                         case IDLE:
                             return 9;
