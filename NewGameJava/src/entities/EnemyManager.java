@@ -1,10 +1,13 @@
 package entities;
 
 import gamestates.Playing;
-import utilz.Constants;
+import static utilz.Constants.EnemyConstants.*;
+
+import main.Game;
 import utilz.LoadSave;
 
 import java.awt.*;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -35,8 +38,29 @@ public class EnemyManager {
 
     private void drawPikachu(Graphics g, int xLevelOffSet) {
         for(Pikachu pikachu : listOfPikachu){
-            g.drawImage(pikachuArray[pikachu.getEnemyState()][pikachu.getAnimationIndex()],(int) pikachu.getHitBox().x - xLevelOffSet - Constants.EnemyConstants.PIKACHU_OFFSET_X,(int) pikachu.getHitBox().y - - Constants.EnemyConstants.PIKACHU_OFFSET_Y,Constants.EnemyConstants.PIKACHU_WIDTH,Constants.EnemyConstants.PIKACHU_HEIGHT,null);
-           // pikachu.drawHitBox(g, xLevelOffSet);
+            if(pikachu.isActive()){
+                g.drawImage(pikachuArray[pikachu.getEnemyState()][pikachu.getAnimationIndex()],(int) pikachu.getHitBox().x - xLevelOffSet - PIKACHU_OFFSET_X + pikachu.flipX(),(int) pikachu.getHitBox().y - PIKACHU_OFFSET_Y,PIKACHU_WIDTH * pikachu.flipW(),PIKACHU_HEIGHT,null);
+                // pikachu.drawHitBox(g, (int) (xLevelOffSet * Game.SCALE));
+              //  pikachu.drawAttackBox(g, xLevelOffSet);
+            }
+        }
+    }
+
+    public void resetEverything(){
+        for(Pikachu pikachu: listOfPikachu){
+            pikachu.resetEnemy();
+        }
+    }
+
+
+    public void checkEnemyHit(Rectangle2D.Float attackRangeBox){
+        for(Pikachu pikachu: listOfPikachu){
+            if(pikachu.isActive()){
+                if(attackRangeBox.intersects(pikachu.hitBox)){
+                    pikachu.hurt(10);
+                    return;
+                }
+            }
         }
     }
 
@@ -46,7 +70,7 @@ public class EnemyManager {
 
         for(int i = 0; i < pikachuArray.length; i++){
             for(int j = 0; j < pikachuArray[i].length; j++){
-                pikachuArray[i][j] = temp.getSubimage(j * Constants.EnemyConstants.PIKACHU_WIDTH_DEFAULT,i * Constants.EnemyConstants.PIKACHU_HEIGHT_DEFAULT, Constants.EnemyConstants.PIKACHU_WIDTH_DEFAULT,Constants.EnemyConstants.PIKACHU_HEIGHT_DEFAULT);
+                pikachuArray[i][j] = temp.getSubimage(j * PIKACHU_WIDTH_DEFAULT,i * PIKACHU_HEIGHT_DEFAULT, PIKACHU_WIDTH_DEFAULT,PIKACHU_HEIGHT_DEFAULT);
 
             }
         }

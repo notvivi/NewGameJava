@@ -28,7 +28,7 @@ public class LoadSave {
     public static final String POKEMON_TITLE = "res/pokemon_title.png";
     public static final String ENEMY_PIKACHU_ATLAS = "pikachu_sprite.png";
     public static final String STORY_BACKGROUND = "res/story_background.png";
-
+    public static final String HEALTH_BAR = "res/health_power_bar.png";
 
 
     public static BufferedImage getSpriteAtlas(String fileName){
