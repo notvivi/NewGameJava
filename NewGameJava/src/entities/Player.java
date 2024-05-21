@@ -33,7 +33,7 @@ public class Player extends Entity {
     private int statusBarY = (int)(10 * Game.SCALE);
 
     private int healthBarWidth = (int)(150 * Game.SCALE);
-    private int healthBarHeight = (int)(4 * Game.SCALE);
+    private int healthBarHeight = (int)(6 * Game.SCALE);
     private int healthBarXStart = (int)(34 * Game.SCALE);
     private int healthBarYStart = (int)(14 * Game.SCALE);
 
@@ -110,7 +110,6 @@ public class Player extends Entity {
 
     public void render(Graphics g, int levelOffSet){
         g.drawImage(animations[playerAction][aniIndex], (int) (hitBox.x - xDrawOffSet) - levelOffSet + flipX, (int) (hitBox.y - yDrawOffSet) ,width * flipW,height,null);
-      //  drawAttackRangeBox(g, levelOffSet);
         drawUI(g);
     }
 
@@ -121,7 +120,8 @@ public class Player extends Entity {
 
     private void drawUI(Graphics g) {
        g.drawImage(statusBarImage,statusBarX,statusBarY,statusBarWidth,statusBarHeight,null);
-       g.setColor(Color.red);
+       Color hpGreen = new Color(50,201,56,255);
+       g.setColor(hpGreen);
        g.fillRect(healthBarXStart + statusBarX,healthBarYStart + statusBarY,healthWidth,healthBarHeight);
     }
 

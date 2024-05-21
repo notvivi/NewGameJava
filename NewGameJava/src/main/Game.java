@@ -29,7 +29,7 @@ public class Game implements Runnable {
     public final static int GAME_HEIGHT = TILES_SIZE* TILES_IN_HEIGHT;
 
     public Game(){
-       // playSong();
+        playSong();
         initClasses();
         gamePanel = new GamePanel(this);
         gameWindow = new GameWindow(gamePanel);
@@ -62,8 +62,6 @@ public class Game implements Runnable {
                 break;
             case PLAYING:
                 playing.update();
-                break;
-            case OPTIONS:
                 break;
             case QUIT:
                 System.exit(0);

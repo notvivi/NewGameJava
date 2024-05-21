@@ -13,7 +13,7 @@ import java.awt.image.BufferedImage;
 public class Menu extends State implements MethodsForStates {
 
     private TextReader textReader = new TextReader();
-    private MenuButton[] menuButtons = new MenuButton[2];
+    private MenuButton[] menuButtons = new MenuButton[1];
     private Font monospacedBold = new Font(Font.MONOSPACED, Font.BOLD, 25);
 
     private BufferedImage backgroundMenuImage;
@@ -38,14 +38,13 @@ public class Menu extends State implements MethodsForStates {
         backgroundMenuImage = LoadSave.getSpriteAtlas(LoadSave.MENU_POKEDEX_2);
         menuWidth = (int) (backgroundMenuImage.getWidth() * Game.SCALE);
         menuHeight = (int) (backgroundMenuImage.getHeight() * Game.SCALE);
-        menuX = (int) ((int) (Game.GAME_WIDTH / 2) - menuWidth / 2);
+        menuX =  (Game.GAME_WIDTH / 2) - menuWidth / 2;
         menuY = (int) (45 * Game.SCALE);
 
     }
 
     private void loadButtons() {
-        menuButtons[0] = new MenuButton((int) (Game.GAME_WIDTH / 2.2),(int) (150 * Game.SCALE), 0, GameState.STORY);
-        menuButtons[1] = new MenuButton((int) (Game.GAME_WIDTH / 2.2),(int) (220 * Game.SCALE), 1, GameState.OPTIONS);
+        menuButtons[0] = new MenuButton((int) (Game.GAME_WIDTH / 2.2),(int) (190 * Game.SCALE), 0, GameState.STORY);
     }
 
     @Override

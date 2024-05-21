@@ -21,8 +21,8 @@ public class GameoverOverlay {
 
         g.setColor(Color.white);
         g.setFont(monospacedBold);
-        g.drawString("Game Over",Game.GAME_WIDTH /2, 150);
-        g.drawString("Press esc to enter Main menu", Game.GAME_WIDTH / 2, 300);
+        g.drawString("Game Over", (int) (Game.GAME_WIDTH /2.2), 150);
+        g.drawString("Press esc to enter Main menu", (int) (Game.GAME_WIDTH/2.6), 300);
     }
 
     public void keyPressed(KeyEvent event){
