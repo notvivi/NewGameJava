@@ -2,8 +2,13 @@ package utilz;
 
 import main.Game;
 
+/**
+ * Class that creates all important variables.
+ */
 public class Constants {
-
+    /**
+     * Class that stores variables for enemies.
+     */
     public static class EnemyConstants{
         public static final int PIKACHU = 0;
         public static final int IDLE = 0;
@@ -21,6 +26,12 @@ public class Constants {
         public static final int PIKACHU_OFFSET_X = (int)(26 * Game.SCALE);
         public static final int PIKACHU_OFFSET_Y = (int)(9 * Game.SCALE);
 
+        /**
+         * Method that returns sprite states.
+         * @param enemyType
+         * @param enemyState
+         * @return
+         */
         public static int getSpriteAmount(int enemyType, int enemyState){
             switch (enemyType){
                 case PIKACHU:
@@ -41,6 +52,11 @@ public class Constants {
          return 0;
         }
 
+        /**
+         * Method that gets enemy max health.
+         * @param enemyType
+         * @return
+         */
         public static int getMaxHealth(int enemyType){
             switch(enemyType){
                 case PIKACHU:
@@ -50,6 +66,11 @@ public class Constants {
             }
         }
 
+        /**
+         * Method that enemy damage.
+         * @param enemyType
+         * @return
+         */
         public static int getEnemyDamage(int enemyType){
             switch(enemyType){
                 case PIKACHU:
@@ -60,12 +81,20 @@ public class Constants {
         }
 
     }
+
+    /**
+     * Class that stores direction variables.
+     */
     public static class Directions{
         public static final int LEFT = 0;
         public static final int UP = 1;
         public static final int RIGHT = 2;
         public static final int DOWN = 3;
     }
+
+    /**
+     * Class that stores cloud variables.
+     */
     public static class Environment {
         public static final int BIG_CLOUDS_WIDTH_DEFAULT = 448;
         public static final int BIG_CLOUDS_HEIGHT_DEFAULT = 101;
@@ -81,6 +110,10 @@ public class Constants {
 
 
     }
+
+    /**
+     * Class that stores ui variables.
+     */
     public static class Ui{
         public static class Buttons{
             public static final int BUTTON_WIDTH_DEFAULT = 140;
@@ -96,6 +129,9 @@ public class Constants {
         }
     }
 
+    /**
+     * Class that stores player variables.
+     */
     public static class PlayerConstants{
         public static final int IDLE = 0;
         public static final int RUNNING = 1;
@@ -105,6 +141,11 @@ public class Constants {
         public static final int HIT = 5;
         public static final int DEAD = 6;
 
+        /**
+         * Method that returns sprite states.
+         * @param player_action
+         * @return
+         */
         public static int getSpriteAmount(int player_action) {
             switch (player_action) {
                 case DEAD:

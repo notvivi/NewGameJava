@@ -10,12 +10,19 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
-public class Story extends State implements MethodsForStates {
+/**
+ * Class that creates story state in game.
+ */
+public class Story extends State implements IMethodsForStates {
     private TextReader textReader = new TextReader();
     private StoryButton[] storyButtons = new StoryButton[1];
     private final BufferedImage storyBackground;
     private Font monospacedBold = new Font(Font.MONOSPACED, Font.BOLD, 25);
 
+    /**
+     * Class constructor.
+     * @param game
+     */
     public Story(Game game) {
         super(game);
         loadButtons();
@@ -23,12 +30,16 @@ public class Story extends State implements MethodsForStates {
         storyBackground = LoadSave.getSpriteAtlas(LoadSave.STORY_BACKGROUND);
     }
 
+    /**
+     * Method that loads buttons.
+     */
     private void loadButtons() {
         storyButtons[0] = new StoryButton((int) (Game.GAME_WIDTH / 1.94),(int) (300 * Game.SCALE), 0, GameState.PLAYING);
     }
 
-
-
+    /**
+     * Method that updates buttons.
+     */
     @Override
     public void update() {
         for(StoryButton sb: storyButtons){
@@ -36,11 +47,17 @@ public class Story extends State implements MethodsForStates {
         }
     }
 
+    /**
+     * Method that loads story file.
+     */
     public void loadArraylist(){
         textReader.read(textReader.getSTORY());
     }
 
-
+    /**
+     * Method that draws everything in this class.
+     * @param g
+     */
     @Override
     public void draw(Graphics g) {
         g.drawImage(storyBackground,0,0,Game.GAME_WIDTH,Game.GAME_HEIGHT,null);
@@ -56,11 +73,22 @@ public class Story extends State implements MethodsForStates {
         }
     }
 
+    /**
+     * Nothing.
+     * @param mouseEvent
+     */
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
 
     }
+    public void mouseOver(MouseEvent mouseEvent){
 
+    }
+
+    /**
+     * Method that checks if user pressed button.
+     * @param mouseEvent
+     */
     @Override
     public void mousePressed(MouseEvent mouseEvent) {
         for(StoryButton sb: storyButtons){
@@ -71,6 +99,10 @@ public class Story extends State implements MethodsForStates {
         }
     }
 
+    /**
+     * Method that checks if user released button.
+     * @param mouseEvent
+     */
     @Override
     public void mouseReleased(MouseEvent mouseEvent) {
         for(StoryButton sb: storyButtons){
@@ -83,12 +115,20 @@ public class Story extends State implements MethodsForStates {
         }
         resetButtons();
     }
+
+    /**
+     * Method that resets button.
+     */
     private void resetButtons() {
         for(StoryButton sb: storyButtons){
             sb.resetBooleans();
         }
     }
 
+    /**
+     * Method that checks if player moved with mouse on button.
+     * @param mouseEvent
+     */
     @Override
     public void mouseMoved(MouseEvent mouseEvent) {
         for(StoryButton sb: storyButtons){
@@ -102,6 +142,10 @@ public class Story extends State implements MethodsForStates {
         }
     }
 
+    /**
+     * Method that checks if player pressed back space.
+     * @param keyEvent
+     */
     @Override
     public void keyPressed(KeyEvent keyEvent) {
         if (keyEvent.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
@@ -109,6 +153,10 @@ public class Story extends State implements MethodsForStates {
         }
     }
 
+    /**
+     * Nothing.
+     * @param keyEvent
+     */
     @Override
     public void keyReleased(KeyEvent keyEvent) {
 

@@ -7,14 +7,25 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+/**
+ * Class that checks all mouse inputs.
+ */
 public class MouseInputs implements MouseListener, MouseMotionListener {
 
     private GamePanel gamePanel;
+
+    /**
+     * Class constructor.
+     * @param gamePanel
+     */
     public MouseInputs(GamePanel gamePanel){
         this.gamePanel = gamePanel;
     }
 
-
+    /**
+     * Method that checks if user clicked on mouse.
+     * @param e the event to be processed
+     */
     public void mouseClicked(MouseEvent e) {
         switch (GameState.state){
             case PLAYING:
@@ -25,6 +36,10 @@ public class MouseInputs implements MouseListener, MouseMotionListener {
         }
     }
 
+    /**
+     * Method that checks if user pressed mouse.
+     * @param e the event to be processed
+     */
     public void mousePressed(MouseEvent e) {
         switch (GameState.state){
             case START:
@@ -44,6 +59,10 @@ public class MouseInputs implements MouseListener, MouseMotionListener {
         }
     }
 
+    /**
+     * Method that checks if user released mouse.
+     * @param e the event to be processed
+     */
     public void mouseReleased(MouseEvent e) {
         switch (GameState.state){
             case START:
@@ -63,18 +82,34 @@ public class MouseInputs implements MouseListener, MouseMotionListener {
         }
     }
 
+    /**
+     * Nothing.
+     * @param e the event to be processed
+     */
     public void mouseEntered(MouseEvent e) {
 
     }
 
+    /**
+     * Nothing.
+     * @param e the event to be processed
+     */
     public void mouseExited(MouseEvent e) {
 
     }
 
+    /**
+     * Nothing.
+     * @param e the event to be processed
+     */
     public void mouseDragged(MouseEvent e) {
 
     }
 
+    /**
+     * Method that checks if us moved with mouse.
+     * @param e the event to be processed
+     */
     public void mouseMoved(MouseEvent e) {
         switch (GameState.state){
             case START:

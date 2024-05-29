@@ -4,7 +4,7 @@ import entities.EnemyManager;
 import entities.Player;
 import levels.LevelManager;
 import main.Game;
-import ui.GameoverOverlay;
+import ui.GameOverOverlay;
 import utilz.LoadSave;
 import utilz.Constants.Environment;
 
@@ -15,14 +15,17 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
-public class Playing extends State implements MethodsForStates{
+/**
+ * Class that creates whole playing state in game.
+ */
+public class Playing extends State implements IMethodsForStates {
 
     Random random = new Random();
 
     private LevelManager levelManager;
     private Player player;
     private EnemyManager enemyManager;
-    private GameoverOverlay gameoverOverlay;
+    private GameOverOverlay gameoverOverlay;
 
     private int xLevelOffSet = 0;
     private final int leftBorder = (int) (0.2 * Game.GAME_WIDTH);
@@ -39,7 +42,10 @@ public class Playing extends State implements MethodsForStates{
     private boolean gameOver = false;
 
 
-
+    /**
+     * Class constructor.
+     * @param game
+     */
     public Playing(Game game) {
         super(game);
         initClasses(game);
@@ -54,27 +60,38 @@ public class Playing extends State implements MethodsForStates{
 
     }
 
+    /**
+     * Method that checks if enemy got hit.
+     * @param attackRangeBox
+     */
     public void checkEnemyHit(Rectangle2D.Float attackRangeBox){
         enemyManager.checkEnemyHit(attackRangeBox);
     }
 
+    /**
+     * Method that initialize classes in playing state.
+     * @param game
+     */
     private void initClasses(Game game) {
         levelManager = new LevelManager(game);
         enemyManager = new EnemyManager(this);
         player = new Player(200,200,(int)(64 * Game.SCALE),(int)(40 * Game.SCALE), this);
         player.loadLevelData(levelManager.getCurrentLevel().getLevelData());
-        gameoverOverlay = new GameoverOverlay(this);
+        gameoverOverlay = new GameOverOverlay(this);
 
     }
 
-    public void windowFocusLost() {
-        player.resetDirectionBooleans();
-    }
+    /**
+     * Method that returns player.
+     * @return
+     */
     public Player getPlayer(){
         return player;
     }
 
-
+    /**
+     * Method that updates whole playing state.
+     */
     @Override
     public void update() {
         if(!gameOver){
@@ -85,6 +102,9 @@ public class Playing extends State implements MethodsForStates{
         }
     }
 
+    /**
+     * Method that checks if player is close to border, if so, camera moves.
+     */
     private void checkCloseToBorder() {
         int playerX = (int) player.getHitBox().x;
         int difference = playerX - xLevelOffSet;
@@ -105,6 +125,10 @@ public class Playing extends State implements MethodsForStates{
 
     }
 
+    /**
+     * Method that draws everything in playing state.
+     * @param g
+     */
     @Override
     public void draw(Graphics g) {
         if(gameOver){
@@ -118,6 +142,10 @@ public class Playing extends State implements MethodsForStates{
         }
     }
 
+    /**
+     * Method that draws clouds in game.
+     * @param g
+     */
     private void drawClouds(Graphics g) {
         for(int i = 0; i < 3;i++){
             g.drawImage(bigClouds, i * Environment.BIG_CLOUDS_WIDTH - (int) (xLevelOffSet * 0.3),(int) (204 * Game.SCALE), Environment.BIG_CLOUDS_WIDTH, Environment.BIG_CLOUDS_HEIGHT,null);
@@ -127,16 +155,27 @@ public class Playing extends State implements MethodsForStates{
         }
     }
 
+    /**
+     * Method that resets everything.
+     */
     public void resetAll(){
         gameOver = false;
         player.resetAll();
         enemyManager.resetEverything();
     }
 
+    /**
+     * Method that sets game over.
+     * @param gameOver
+     */
     public void setGameOver(boolean gameOver){
         this.gameOver = gameOver;
     }
 
+    /**
+     * Method that sets attack to true if user clicks button.
+     * @param mouseEvent
+     */
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
         if(!gameOver){
@@ -146,21 +185,39 @@ public class Playing extends State implements MethodsForStates{
         }
     }
 
+    /**
+     * Nothing.
+     * @param mouseEvent
+     */
     @Override
     public void mousePressed(MouseEvent mouseEvent) {
 
     }
 
+    /**
+     * Nothing.
+     * @param mouseEvent
+     */
     @Override
     public void mouseReleased(MouseEvent mouseEvent) {
 
     }
 
+
+
+    /**
+     * Nothing
+     * @param mouseEvent
+     */
     @Override
     public void mouseMoved(MouseEvent mouseEvent) {
 
     }
 
+    /**
+     * Method that changes player move state.
+     * @param keyEvent
+     */
     @Override
     public void keyPressed(KeyEvent keyEvent) {
         if(gameOver){
@@ -188,6 +245,10 @@ public class Playing extends State implements MethodsForStates{
         }
     }
 
+    /**
+     * Method that checks users movement.
+     * @param keyEvent
+     */
     @Override
     public void keyReleased(KeyEvent keyEvent) {
         if(!gameOver){

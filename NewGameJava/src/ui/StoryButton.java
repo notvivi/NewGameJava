@@ -7,6 +7,9 @@ import utilz.LoadSave;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * Class that creates story button.
+ */
 public class StoryButton {
     private int xPosition;
     private int yPosition;
@@ -19,6 +22,13 @@ public class StoryButton {
     GameState gameState;
     private BufferedImage images[];
 
+    /**
+     * Class constructor.
+     * @param xPosition
+     * @param yPosition
+     * @param rowIndex
+     * @param gameState
+     */
     public StoryButton(int xPosition, int yPosition, int rowIndex, GameState gameState){
         this.xPosition = xPosition;
         this.yPosition = yPosition;
@@ -27,11 +37,17 @@ public class StoryButton {
         loadImages();
         isInHitBox();
     }
+
+    /**
+     * Method that creates button hit box.
+     */
     private void isInHitBox() {
         buttonHitBox = new Rectangle(xPosition - xOffSetCenter,yPosition, Constants.Ui.Buttons.CIRCLE_BUTTON_WIDTH, Constants.Ui.Buttons.CIRCLE_BUTTON_HEIGHT);
     }
 
-
+    /**
+     * Method that loads button images.
+     */
     private void loadImages(){
         images = new BufferedImage[2];
         BufferedImage temp = LoadSave.getSpriteAtlas(LoadSave.START_BUTTON);
@@ -41,11 +57,18 @@ public class StoryButton {
 
     }
 
+    /**
+     * Method that draws button.
+     * @param g
+     */
     public void draw(Graphics g){
         update();
         g.drawImage(images[index],xPosition - xOffSetCenter,yPosition, Constants.Ui.Buttons.CIRCLE_BUTTON_WIDTH, Constants.Ui.Buttons.CIRCLE_BUTTON_HEIGHT,null);
     }
 
+    /**
+     * Method that updates button state.
+     */
     public void update(){
         index = 0;
         if(mouseOver){
@@ -53,26 +76,41 @@ public class StoryButton {
         }
     }
 
+    /**
+     * Method that sets game state.
+     */
     public void setGameState(){
         GameState.state = gameState;
     }
+
+    /**
+     * Method that resets button.
+     */
     public void resetBooleans(){
         mouseOver = false;
         mousePressed = false;
     }
 
-    public boolean isMouseOver() {
-        return mouseOver;
-    }
-
+    /**
+     * Method that sets mouse over.
+     * @param mouseOver
+     */
     public void setMouseOver(boolean mouseOver) {
         this.mouseOver = mouseOver;
     }
 
+    /**
+     * Method that returns if mouse is pressed.
+     * @return
+     */
     public boolean isMousePressed() {
         return mousePressed;
     }
 
+    /**
+     * Method that sets mouse pressed.
+     * @param mousePressed
+     */
     public void setMousePressed(boolean mousePressed) {
         this.mousePressed = mousePressed;
     }

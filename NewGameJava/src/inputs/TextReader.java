@@ -5,6 +5,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Class that is used for reading files.
+ */
 public class TextReader {
     private ArrayList<String> sentences = new ArrayList<>();
     private ArrayList<String> credits = new ArrayList<>();
@@ -13,10 +16,17 @@ public class TextReader {
     private final String CREDITS = "./src/res/text_files/credits.txt";
     private final String FUTURE_PLANS = "./src/res/text_files/future_plans.txt";
 
+    /**
+     * Class constructor.
+     */
     public TextReader() {
 
     }
 
+    /**
+     * Method that reads files.
+     * @param fileName
+     */
     public void read(String fileName){
         BufferedReader bufferedReader;
         try {
@@ -39,27 +49,50 @@ public class TextReader {
         }
     }
 
+    /**
+     * Method that returns arraylist.
+     * @return
+     */
     public ArrayList<String> getSentences() {
         return sentences;
     }
 
-
+    /**
+     * Method that returns arraylist.
+     * @return
+     */
     public ArrayList<String> getCredits() {
         return credits;
     }
 
+    /**
+     * Method that returns story string.
+     * @return
+     */
     public String getSTORY() {
         return STORY;
     }
 
+    /**
+     * Method that returns credits string.
+     * @return
+     */
     public String getCREDITS() {
         return CREDITS;
     }
 
+    /**
+     * Method that returns arraylist.
+     * @return
+     */
     public ArrayList<String> getFuturePlans() {
         return futurePlans;
     }
 
+    /**
+     * Method that returns future plans string.
+     * @return
+     */
     public String getFUTURE_PLANS() {
         return FUTURE_PLANS;
     }

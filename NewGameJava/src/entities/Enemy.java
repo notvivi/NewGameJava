@@ -9,6 +9,9 @@ import static utilz.Constants.EnemyConstants.*;
 import static utilz.Constants.Directions.*;
 import static utilz.SpecialHelpMethods.*;
 
+/**
+ * Class that enemies are extending from
+ */
 public abstract class Enemy extends Entity{
 
     protected int animationIndex;
@@ -29,7 +32,14 @@ public abstract class Enemy extends Entity{
     protected boolean active = true;
     protected boolean attackCheck;
 
-
+    /**
+     * Class constructor
+     * @param x
+     * @param y
+     * @param width
+     * @param height
+     * @param enemyType
+     */
     public Enemy(float x, float y, int width, int height, int enemyType) {
         super(x, y, width, height);
         initHitBox(x,y,width,height);
@@ -38,6 +48,10 @@ public abstract class Enemy extends Entity{
         currentHealth = maxHealth;
     }
 
+    /**
+     * Method that checks if enemy is on the map.
+     * @param levelData
+     */
     protected void firstUpdateCheck(int[][] levelData){
         if(!isEntityOnMap(hitBox,levelData)){
             enemyInAir = true;
@@ -45,6 +59,10 @@ public abstract class Enemy extends Entity{
         firstUpdate = false;
     }
 
+    /**
+     * Method that checks if enemy is in the air.
+     * @param levelData
+     */
     protected void updateEnemyInAir(int[][] levelData){
          if(canMoveThere(hitBox.x,hitBox.y + fallSpeed,hitBox.width,hitBox.height,levelData)){
             hitBox.y += fallSpeed;
@@ -57,12 +75,20 @@ public abstract class Enemy extends Entity{
 
     }
 
+    /**
+     * Method that resets enemy state to zero.
+     * @param enemyState
+     */
     protected void newState(int enemyState){
         this.enemyState = enemyState;
         animationTick = 0;
         animationIndex = 0;
     }
 
+    /**
+     * Method that checks walking
+     * @param levelData
+     */
     protected void move(int[][] levelData){
         float xSpeed = 0;
         if(walkingDirection == LEFT){
@@ -80,6 +106,10 @@ public abstract class Enemy extends Entity{
         changeWalkDirection();
     }
 
+    /**
+     * Method that checks if enemy got minus hp.
+     * @param damage
+     */
     protected void hurt(int damage){
         currentHealth -= damage;
         if(currentHealth <= 0){
@@ -89,6 +119,11 @@ public abstract class Enemy extends Entity{
         }
     }
 
+    /**
+     * Method that checks if player got hit by enemy.
+     * @param attackRangeBox
+     * @param player
+     */
     protected void checkPlayerHit(Rectangle2D.Float attackRangeBox, Player player){
         if(attackRangeBox.intersects(player.hitBox)){
             player.updateHealth(-getEnemyDamage(enemyType));
@@ -96,6 +131,9 @@ public abstract class Enemy extends Entity{
         attackCheck = true;
     }
 
+    /**
+     * Method that resets enemy after player dies.
+     */
     protected void resetEnemy(){
         hitBox.x = x;
         hitBox.y = y;
@@ -106,7 +144,9 @@ public abstract class Enemy extends Entity{
         fallSpeed = 0;
     }
 
-
+    /**
+     * Method that loops through enemy image and changes enemy state.
+     */
     protected void updateAnimationTick(){
         animationTick++;
         if(animationTick >= animationSpeed){
@@ -122,6 +162,9 @@ public abstract class Enemy extends Entity{
         }
     }
 
+    /**
+     * Method that changes walking direction.
+     */
     protected void changeWalkDirection() {
         if(walkingDirection == LEFT){
             walkingDirection = RIGHT;
@@ -130,6 +173,12 @@ public abstract class Enemy extends Entity{
         }
     }
 
+    /**
+     * Method that checks if player is in range of an enemy.
+     * @param levelData
+     * @param player
+     * @return
+     */
     protected boolean canSeePlayer(int[][] levelData, Player player){
         int playerTileY = (int) (player.getHitBox().y / Game.TILES_SIZE);
         
@@ -142,6 +191,11 @@ public abstract class Enemy extends Entity{
        }
        return false;
     }
+
+    /**
+     * Method that checks if player hitbox is in enemy hitbox.
+     * @param player
+     */
     protected void chasePlayer(Player player){
         if(player.hitBox.x > hitBox.x){
             walkingDirection = RIGHT;
@@ -149,26 +203,47 @@ public abstract class Enemy extends Entity{
               walkingDirection = LEFT;
         }
     }
+
+    /**
+     * Method that checks if player is in range for an attack.
+     * @param player
+     * @return
+     */
     protected boolean isPlayerCloseForAttack(Player player){
        int absoluteValue = (int) Math.abs(player.hitBox.x - hitBox.x);
        return absoluteValue <= attackRange;
     }
 
-
+    /**
+     * Method that checks if player is in range.
+     * @param player
+     * @return
+     */
     protected boolean isPlayerInRange(Player player) {
         int absoluteValue = (int) Math.abs(player.hitBox.x - hitBox.x);
         return absoluteValue <= attackRange * 5;
     }
 
-
+    /**
+     * Method that returns animation index.
+     * @return
+     */
     public int getAnimationIndex() {
         return animationIndex;
     }
 
+    /**
+     * Method that returns enemy state.
+     * @return
+     */
     public int getEnemyState() {
         return enemyState;
     }
 
+    /**
+     * Method that returns if enemy is alive.
+     * @return
+     */
     public boolean isActive() {
         return active;
     }

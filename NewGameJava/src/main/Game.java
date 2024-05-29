@@ -6,6 +6,9 @@ import levels.SoundPlayer;
 
 import java.awt.*;
 
+/**
+ * Class that loads whole game.
+ */
 public class Game implements Runnable {
 
     private GameWindow gameWindow;
@@ -28,15 +31,23 @@ public class Game implements Runnable {
     public final static int GAME_WIDTH = TILES_SIZE* TILES_IN_WIDTH;
     public final static int GAME_HEIGHT = TILES_SIZE* TILES_IN_HEIGHT;
 
+    /**
+     * Class constructor.
+     */
     public Game(){
-        playSong();
+       // playSong();
         initClasses();
+
         gamePanel = new GamePanel(this);
         gameWindow = new GameWindow(gamePanel);
         gamePanel.requestFocus();
+
         startGameLoop();
     }
 
+    /**
+     * Method that loads every class that we need.
+     */
     private void initClasses() {
         start = new Start(this);
         menu = new Menu(this);
@@ -44,11 +55,17 @@ public class Game implements Runnable {
         playing = new Playing(this);
     }
 
+    /**
+     * Method that created new game thread.
+     */
     private void startGameLoop(){
         gameThread = new Thread(this);
         gameThread.start();
     }
 
+    /**
+     * Method that updates trough game states.
+     */
     public void update(){
         switch (GameState.state){
             case START:
@@ -70,6 +87,11 @@ public class Game implements Runnable {
                 break;
         }
     }
+
+    /**
+     * Method that draws the current state.
+     * @param g
+     */
     public void render(Graphics g){
         switch (GameState.state){
             case START:
@@ -90,6 +112,9 @@ public class Game implements Runnable {
 
     }
 
+    /**
+     * Method that creates fps in game.
+     */
     public void run() {
 
         double timePerFrame = 1000000000.0 / FPS_SET;
@@ -97,8 +122,6 @@ public class Game implements Runnable {
 
         long previousTime = System.nanoTime();
 
-        int frames = 0;
-        int updates = 0;
         long lastCheck = System.currentTimeMillis();
 
         double deltaU = 0;
@@ -113,45 +136,65 @@ public class Game implements Runnable {
 
             if(deltaU >= 1){
                 update();
-                updates++;
                 deltaU--;
             }
             if(deltaF >= 1){
                 gamePanel.repaint();
-                frames++;
                 deltaF--;
             }
             if(System.currentTimeMillis() - lastCheck >= 1000) {
                 lastCheck = System.currentTimeMillis();
-                frames = 0;
-                updates = 0;
             }
 
         }
     }
+
+    /**
+     * Method that checks if player is on the software.
+     */
     public void windowFocusLost() {
         if((GameState.state == GameState.PLAYING)){
             playing.getPlayer().resetDirectionBooleans();
         }
     }
 
+    /**
+     * Method that loads song and plays it.
+     */
     public void playSong(){
         soundPlayer.setFile();
         soundPlayer.play();
         soundPlayer.loop();
     }
 
+    /**
+     * Method that returns playing.
+     * @return
+     */
     public Playing getPlaying() {
         return playing;
     }
 
+    /**
+     * Method that returns menu.
+     * @return
+     */
     public Menu getMenu() {
         return menu;
     }
 
+    /**
+     * Method that returns start.
+     * @return
+     */
     public Start getStart() {
         return start;
     }
+
+    /**
+     * Method that returns story.
+     * @return
+     */
     public Story getStory(){
         return story;
     }

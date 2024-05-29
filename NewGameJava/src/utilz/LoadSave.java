@@ -10,13 +10,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
+/**
+ * Class that loads images.
+ */
 public class LoadSave {
 
     public static final String PLAYER_ATLAS = "res/player_sprites.png";
     public static final String LEVEL_ATLAS = "res/outside_sprites.png";
     public static final String LEVEL_ONE_DATA = "res/level_one_data_long.png";
     public static final String MENU_BUTTON_ATLAS = "res/button_atlas.png";
-    public static final String MENU_BACKGROUND = "res/menu_background.png";
     public static final String MENU_POKEDEX = "res/menu_background_pokedex.png";
     public static final String START_BUTTON = "res/play_button2x.png";
     public static final String PIKACHU_MENU_BACKGROUND = "res/pikachu_background.png";
@@ -30,7 +32,11 @@ public class LoadSave {
     public static final String STORY_BACKGROUND = "res/story_background.png";
     public static final String HEALTH_BAR = "res/health_power_bar.png";
 
-
+    /**
+     * Method that loads image.
+     * @param fileName
+     * @return
+     */
     public static BufferedImage getSpriteAtlas(String fileName){
         BufferedImage image = null;
         InputStream inputStream = LoadSave.class.getResourceAsStream("/" + fileName);
@@ -48,7 +54,11 @@ public class LoadSave {
         return image;
     }
 
-    public static ArrayList<Pikachu> getCrabs(){
+    /**
+     * Method that loads pikachu sprite.
+     * @return
+     */
+    public static ArrayList<Pikachu> getPikachus(){
         BufferedImage image = getSpriteAtlas(LEVEL_ONE_DATA);
         ArrayList<Pikachu> crabbyList = new ArrayList<>();
         for(int i = 0; i < image.getHeight();i++){
@@ -63,6 +73,10 @@ public class LoadSave {
         return crabbyList;
     }
 
+    /**
+     * Method that loads level data.
+     * @return
+     */
     public static int[][] getDataAboutLevel(){
         BufferedImage image = getSpriteAtlas(LEVEL_ONE_DATA);
         int[][] levelData = new int[image.getHeight()][image.getWidth()];
@@ -78,4 +92,5 @@ public class LoadSave {
         }
         return levelData;
     }
+
 }

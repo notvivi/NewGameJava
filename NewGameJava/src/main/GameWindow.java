@@ -7,10 +7,17 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
 import java.awt.image.BufferedImage;
 
+/**
+ * Method that creates window for the game.
+ */
 public class GameWindow extends JFrame {
     private JFrame jframe;
     private BufferedImage iconImage;
 
+    /**
+     * Class constructor.
+     * @param gamePanel
+     */
     public GameWindow(GamePanel gamePanel){
        load();
        jframe = new JFrame();
@@ -37,6 +44,9 @@ public class GameWindow extends JFrame {
        });
     }
 
+    /**
+     * Method that loads icon image.
+     */
     public void load(){
         iconImage = LoadSave.getSpriteAtlas(LoadSave.ICON);
     }

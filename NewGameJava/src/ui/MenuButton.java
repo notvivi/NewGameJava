@@ -7,6 +7,9 @@ import utilz.Constants.Ui.Buttons;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * Class that creates button for menu.
+ */
 public class MenuButton {
 
     private int xPosition;
@@ -20,6 +23,13 @@ public class MenuButton {
     GameState gameState;
     private BufferedImage images[];
 
+    /**
+     * Class constructor.
+     * @param xPosition
+     * @param yPosition
+     * @param rowIndex
+     * @param gameState
+     */
     public MenuButton(int xPosition, int yPosition, int rowIndex, GameState gameState){
         this.xPosition = xPosition;
         this.yPosition = yPosition;
@@ -28,11 +38,17 @@ public class MenuButton {
         loadImages();
         isInHitBox();
     }
+
+    /**
+     * Method that creates button hitbox.
+     */
     private void isInHitBox() {
         buttonHitBox = new Rectangle(xPosition - xOffSetCenter,yPosition,Buttons.BUTTON_WIDTH,Buttons.BUTTON_HEIGHT);
     }
 
-
+    /**
+     * Method that loads button images.
+     */
     private void loadImages(){
         images = new BufferedImage[3];
         BufferedImage temp = LoadSave.getSpriteAtlas(LoadSave.MENU_BUTTON_ATLAS);
@@ -42,10 +58,18 @@ public class MenuButton {
 
     }
 
+    /**
+     * Method that draws button.
+     * @param g
+     */
     public void draw(Graphics g){
         update();
         g.drawImage(images[index],xPosition - xOffSetCenter,yPosition,Buttons.BUTTON_WIDTH,Buttons.BUTTON_HEIGHT,null);
     }
+
+    /**
+     * Method that updates button.
+     */
     public void update(){
         index = 0;
         if(mouseOver) {
@@ -57,26 +81,41 @@ public class MenuButton {
 
     }
 
+    /**
+     * Method that sets current gamestate.
+     */
     public void setGameState(){
         GameState.state = gameState;
     }
+
+    /**
+     * Method that resets button.
+     */
     public void resetBooleans(){
         mouseOver = false;
         mousePressed = false;
     }
 
-    public boolean isMouseOver() {
-        return mouseOver;
-    }
-
+    /**
+     * Method that sets if mouse over.
+     * @param mouseOver
+     */
     public void setMouseOver(boolean mouseOver) {
         this.mouseOver = mouseOver;
     }
 
+    /**
+     * Method that returns if mouse is pressed.
+     * @return
+     */
     public boolean isMousePressed() {
         return mousePressed;
     }
 
+    /**
+     * Method that sets mouse pressed.
+     * @param mousePressed
+     */
     public void setMousePressed(boolean mousePressed) {
         this.mousePressed = mousePressed;
     }

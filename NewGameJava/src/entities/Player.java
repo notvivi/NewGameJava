@@ -11,6 +11,9 @@ import java.awt.image.BufferedImage;
 
 import static utilz.Constants.PlayerConstants.*;
 
+/**
+ * Class that creates whole player in game.
+ */
 public class Player extends Entity {
 
     private BufferedImage[][] animations;
@@ -56,7 +59,14 @@ public class Player extends Entity {
 
     private Playing playing;
 
-
+    /**
+     * Class constructor.
+     * @param x
+     * @param y
+     * @param width
+     * @param height
+     * @param playing
+     */
     public Player(float x, float y, int width, int height, Playing playing) {
         super(x, y, width, height);
         loadAnimations();
@@ -65,7 +75,9 @@ public class Player extends Entity {
         this.playing = playing;
     }
 
-
+    /**
+     * Method that updates players behavior in game.
+     */
     public void update() {
         changeHealth();
         if(currentHealth <= 0){
@@ -82,6 +94,9 @@ public class Player extends Entity {
         setAnimation();
     }
 
+    /**
+     * Method that resets everything after player dies.
+     */
     public void resetAll(){
         resetDirectionBooleans();
         playerInAir = false;
@@ -98,7 +113,9 @@ public class Player extends Entity {
         }
     }
 
-
+    /**
+     * Method that checks if player can attack enemy.
+     */
     private void checkAttack() {
         if(attackCheck || aniIndex != 1){
             return;
@@ -107,17 +124,20 @@ public class Player extends Entity {
         playing.checkEnemyHit(attackRangeBox);
     }
 
-
+    /**
+     * Method that draws player.
+     * @param g
+     * @param levelOffSet
+     */
     public void render(Graphics g, int levelOffSet){
         g.drawImage(animations[playerAction][aniIndex], (int) (hitBox.x - xDrawOffSet) - levelOffSet + flipX, (int) (hitBox.y - yDrawOffSet) ,width * flipW,height,null);
         drawUI(g);
     }
 
-    private void drawAttackRangeBox(Graphics g, int levelXOffSet) {
-        g.setColor(Color.red);
-        g.drawRect((int)attackRangeBox.x - levelXOffSet, (int)attackRangeBox.y, (int)attackRangeBox.width,(int)attackRangeBox.height);
-    }
-
+    /**
+     * Method that draws health bar.
+     * @param g
+     */
     private void drawUI(Graphics g) {
        g.drawImage(statusBarImage,statusBarX,statusBarY,statusBarWidth,statusBarHeight,null);
        Color hpGreen = new Color(50,201,56,255);
@@ -125,10 +145,16 @@ public class Player extends Entity {
        g.fillRect(healthBarXStart + statusBarX,healthBarYStart + statusBarY,healthWidth,healthBarHeight);
     }
 
+    /**
+     * Method that changes health as enemies are hitting player.
+     */
     private void changeHealth() {
         healthWidth = (int)((currentHealth / (float) maxHealth) * healthBarWidth);
     }
 
+    /**
+     * Method that updates players range.
+     */
     private void updateAttackRangeBox() {
         if(right){
             attackRangeBox.x = hitBox.x + hitBox.width + (int)(Game.SCALE * 10);
@@ -138,11 +164,16 @@ public class Player extends Entity {
         attackRangeBox.y = hitBox.y + (Game.SCALE * 10);
     }
 
+    /**
+     * Method that creates players range.
+     */
     private void initAttackRangeBox() {
         attackRangeBox = new Rectangle2D.Float(x,y,(int)(20 * Game.SCALE), (int)(20 * Game.SCALE));
     }
 
-
+    /**
+     * Method that ticks through player sprites.
+     */
     private void updateAnimationTick() {
         aniTick++;
         if(aniTick >= aniSpeed){
@@ -156,6 +187,9 @@ public class Player extends Entity {
         }
     }
 
+    /**
+     * Method that sets animation of a player.
+     */
     private void setAnimation() {
 
         int startAni = playerAction;
@@ -184,11 +218,17 @@ public class Player extends Entity {
         }
     }
 
+    /**
+     * Method that resets players animation tick and index.
+     */
     private void resetAnimationTick() {
         aniTick = 0;
         aniIndex = 0;
     }
 
+    /**
+     * Method that checks where is player and updates his gravity.
+     */
     private void updatePosition() {
         float xSpeed = 0;
         moving = false;
@@ -238,6 +278,9 @@ public class Player extends Entity {
         moving = true;
     }
 
+    /**
+     * Method that checks if player is jumping.
+     */
     private void jump() {
         if(playerInAir){
             return;
@@ -246,11 +289,18 @@ public class Player extends Entity {
         speedInAir = jumpSpeed;
     }
 
+    /**
+     * Method that resets player in air.
+     */
     private void resetInAir() {
         playerInAir = false;
         speedInAir = 0;
     }
 
+    /**
+     * Method that updates, where currently player is.
+     * @param xSpeed
+     */
     private void updateXPosition(float xSpeed) {
         if(SpecialHelpMethods.canMoveThere(hitBox.x + xSpeed,hitBox.y, hitBox.width, hitBox.height, levelData)){
             this.hitBox.x += xSpeed;
@@ -259,6 +309,10 @@ public class Player extends Entity {
         }
     }
 
+    /**
+     * Method that updates players health.
+     * @param lostHealth
+     */
     public void updateHealth(int lostHealth){
         currentHealth += lostHealth;
         if(currentHealth <= 0){
@@ -268,6 +322,9 @@ public class Player extends Entity {
         }
     }
 
+    /**
+     * Method that loads player animations and health bar.
+     */
     private void loadAnimations() {
             BufferedImage img = LoadSave.getSpriteAtlas(LoadSave.PLAYER_ATLAS);
             animations = new BufferedImage[7][8];
@@ -281,12 +338,21 @@ public class Player extends Entity {
 
 
     }
+
+    /**
+     * Method that loads level data.
+     * @param levelData
+     */
     public void loadLevelData(int[][] levelData){
         this.levelData = levelData;
         if(!SpecialHelpMethods.isEntityOnMap(hitBox,levelData)){
             playerInAir = true;
         }
     }
+
+    /**
+     * Method that resets players direction.
+     */
     public void resetDirectionBooleans(){
         left = false;
         right = false;
@@ -294,30 +360,58 @@ public class Player extends Entity {
         down = false;
     }
 
+    /**
+     * Method that sets if player is attacking.
+     * @param attacking
+     */
     public void setAttack(boolean attacking){
         this.attacking = attacking;
     }
 
+    /**
+     * Method that sets if player moves left.
+     * @param left
+     */
     public void setLeft(boolean left) {
         this.left = left;
     }
 
+    /**
+     * Method that returns if player is moving up.
+     * @return
+     */
     public boolean isUp() {
         return up;
     }
 
+    /**
+     * Method that sets if player moves up.
+     * @param up
+     */
     public void setUp(boolean up) {
         this.up = up;
     }
 
+    /**
+     * Method that sets if player moves right.
+     * @param right
+     */
     public void setRight(boolean right) {
         this.right = right;
     }
 
+    /**
+     * Method that sets if player moves down
+     * @param down
+     */
     public void setDown(boolean down) {
         this.down = down;
     }
 
+    /**
+     * Method that sets if player is jumping.
+     * @param jump
+     */
     public void setJump(boolean jump) {
         this.jump = jump;
     }
