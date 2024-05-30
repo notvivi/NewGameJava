@@ -15,6 +15,9 @@ class PlayerTest {
     Playing playing = new Playing(new Game());
     Player player = new Player(10,10,10,10,playing);
 
+    /**
+     * Method that tests update method.
+     */
     @Test
     void update() {
         player.setCurrentHealth(0);
@@ -27,6 +30,9 @@ class PlayerTest {
         }
     }
 
+    /**
+     * Method that tests reset all method.
+     */
     @Test
     void resetAll() {
         int[][] levelData = new int[9][5];
@@ -42,6 +48,9 @@ class PlayerTest {
     void render() {
     }
 
+    /**
+     * Method that tests update health method.
+     */
     @Test
     void updateHealth() {
         Player player = new Player(10,10,10,10,playing);

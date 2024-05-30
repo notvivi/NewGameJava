@@ -12,6 +12,9 @@ class LoadSaveTest {
     void getSpriteAtlas() {
     }
 
+    /**
+     * Method that tests if getting pikachus from level is okey.
+     */
     @org.junit.jupiter.api.Test
     void getPikachus() {
         int number = LoadSave.getPikachus().size();
