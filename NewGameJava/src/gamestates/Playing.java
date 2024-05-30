@@ -273,4 +273,12 @@ public class Playing extends State implements IMethodsForStates {
         }
 
     }
+
+    /**
+     * Method that returns if game is over.
+     * @return
+     */
+    public boolean isGameOver() {
+        return gameOver;
+    }
 }

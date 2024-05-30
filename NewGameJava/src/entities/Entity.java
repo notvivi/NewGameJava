@@ -57,5 +57,20 @@ public abstract class Entity {
     public Rectangle2D.Float getHitBox() {
         return hitBox;
     }
-    
+
+    /**
+     * Method that returns y.
+     * @return
+     */
+    public float getY() {
+        return y;
+    }
+
+    /**
+     * Method that returns x.
+     * @return
+     */
+    public float getX() {
+        return x;
+    }
 }

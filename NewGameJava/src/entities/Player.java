@@ -415,4 +415,28 @@ public class Player extends Entity {
     public void setJump(boolean jump) {
         this.jump = jump;
     }
+
+    /**
+     * Method that returns players max health.
+     * @return
+     */
+    public int getMaxHealth() {
+        return maxHealth;
+    }
+
+    /**
+     * Method that returns players current health.
+     * @return
+     */
+    public int getCurrentHealth() {
+        return currentHealth;
+    }
+
+    /**
+     * Method that sets players current health.
+     * @param currentHealth
+     */
+    public void setCurrentHealth(int currentHealth) {
+        this.currentHealth = currentHealth;
+    }
 }
