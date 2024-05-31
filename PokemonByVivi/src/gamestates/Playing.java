@@ -170,16 +170,15 @@ public class Playing extends State implements IMethodsForStates {
         player.resetAll();
         enemyManager.resetEverything();
     }
-
+    public void setGameWin(boolean gameWin){
+        this.gameWin = gameWin;
+    }
     /**
      * Method that sets game over.
      * @param gameOver
      */
     public void setGameOver(boolean gameOver){
         this.gameOver = gameOver;
-    }
-    public void setGameWin(boolean gameWin){
-        this.gameWin = gameWin;
     }
 
     /**
@@ -212,6 +211,9 @@ public class Playing extends State implements IMethodsForStates {
     public void mouseReleased(MouseEvent mouseEvent) {
 
     }
+
+
+
     /**
      * Nothing
      * @param mouseEvent

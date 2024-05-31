@@ -99,14 +99,6 @@ public class StartButton {
     }
 
     /**
-     * Method that returns if mouse is over.
-     * @return
-     */
-    public boolean isMouseOver() {
-        return mouseOver;
-    }
-
-    /**
      * Method that returns if mouse is pressed.
      * @return
      */

@@ -81,9 +81,6 @@ public class Story extends State implements IMethodsForStates {
     public void mouseClicked(MouseEvent mouseEvent) {
 
     }
-    public void mouseOver(MouseEvent mouseEvent){
-
-    }
 
     /**
      * Method that checks if user pressed button.
@@ -143,7 +140,7 @@ public class Story extends State implements IMethodsForStates {
     }
 
     /**
-     * Method that checks if player pressed back space.
+     * Method that checks if player pressed backspace.
      * @param keyEvent
      */
     @Override

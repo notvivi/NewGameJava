@@ -74,8 +74,6 @@ public class Start extends State implements IMethodsForStates {
         textReader.read(textReader.getCREDITS());
     }
 
-
-
     /**
      * Method that draws everything.
      * @param g
