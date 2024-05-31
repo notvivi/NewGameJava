@@ -35,7 +35,7 @@ public class Game implements Runnable {
      * Class constructor.
      */
     public Game(){
-       // playSong();
+        playSong();
         initClasses();
 
         gamePanel = new GamePanel(this);
