@@ -5,6 +5,7 @@ import entities.Player;
 import levels.LevelManager;
 import main.Game;
 import ui.GameOverOverlay;
+import ui.GameWinOverLay;
 import utilz.LoadSave;
 import utilz.Constants.Environment;
 
@@ -26,6 +27,7 @@ public class Playing extends State implements IMethodsForStates {
     private Player player;
     private EnemyManager enemyManager;
     private GameOverOverlay gameoverOverlay;
+    private GameWinOverLay gameWinOverLay;
 
     private int xLevelOffSet = 0;
     private final int leftBorder = (int) (0.2 * Game.GAME_WIDTH);
@@ -40,6 +42,7 @@ public class Playing extends State implements IMethodsForStates {
     private int[]smallCloudsPosition;
 
     private boolean gameOver = false;
+    private boolean gameWin = false;
 
 
     /**
@@ -78,6 +81,7 @@ public class Playing extends State implements IMethodsForStates {
         player = new Player(200,200,(int)(64 * Game.SCALE),(int)(40 * Game.SCALE), this);
         player.loadLevelData(levelManager.getCurrentLevel().getLevelData());
         gameoverOverlay = new GameOverOverlay(this);
+        gameWinOverLay = new GameWinOverLay(this);
 
     }
 
@@ -94,7 +98,7 @@ public class Playing extends State implements IMethodsForStates {
      */
     @Override
     public void update() {
-        if(!gameOver){
+        if(!gameOver && !gameWin){
             levelManager.update();
             player.update();
             enemyManager.update(levelManager.getCurrentLevel().getLevelData(), player);
@@ -133,7 +137,9 @@ public class Playing extends State implements IMethodsForStates {
     public void draw(Graphics g) {
         if(gameOver){
             gameoverOverlay.draw(g);
-        }else{
+        } else if (gameWin) {
+            gameWinOverLay.draw(g);
+        } else{
             g.drawImage(backgroundLevel,0,0,Game.GAME_WIDTH,Game.GAME_HEIGHT,null);
             drawClouds(g);
             enemyManager.draw(g, xLevelOffSet);
@@ -160,6 +166,7 @@ public class Playing extends State implements IMethodsForStates {
      */
     public void resetAll(){
         gameOver = false;
+        gameWin = false;
         player.resetAll();
         enemyManager.resetEverything();
     }
@@ -170,6 +177,9 @@ public class Playing extends State implements IMethodsForStates {
      */
     public void setGameOver(boolean gameOver){
         this.gameOver = gameOver;
+    }
+    public void setGameWin(boolean gameWin){
+        this.gameWin = gameWin;
     }
 
     /**
@@ -202,9 +212,6 @@ public class Playing extends State implements IMethodsForStates {
     public void mouseReleased(MouseEvent mouseEvent) {
 
     }
-
-
-
     /**
      * Nothing
      * @param mouseEvent
@@ -222,7 +229,9 @@ public class Playing extends State implements IMethodsForStates {
     public void keyPressed(KeyEvent keyEvent) {
         if(gameOver){
             gameoverOverlay.keyPressed(keyEvent);
-        }else{
+        } else if (gameWin) {
+            gameWinOverLay.keyPressed(keyEvent);
+        } else{
             switch (keyEvent.getKeyCode()){
                 case KeyEvent.VK_A:
                     player.setLeft(true);

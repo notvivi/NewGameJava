@@ -63,11 +63,19 @@ public class EnemyManager {
      * @param xLevelOffSet
      */
     private void drawPikachu(Graphics g, int xLevelOffSet) {
+        int index = 0;
         for(Pikachu pikachu : listOfPikachu){
             if(pikachu.isActive()){
                 g.drawImage(pikachuArray[pikachu.getEnemyState()][pikachu.getAnimationIndex()],(int) pikachu.getHitBox().x - xLevelOffSet - PIKACHU_OFFSET_X + pikachu.flipX(),(int) pikachu.getHitBox().y - PIKACHU_OFFSET_Y,PIKACHU_WIDTH * pikachu.flipW(),PIKACHU_HEIGHT,null);
+            } else if (!pikachu.isActive()) {
+              index++;
             }
         }
+        if(index == listOfPikachu.size()){
+            playing.setGameWin(true);
+        }
+
+
     }
 
     /**

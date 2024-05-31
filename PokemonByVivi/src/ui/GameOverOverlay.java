@@ -8,10 +8,11 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 
 /**
- * CLass that creates game over layer when player dies.
+ * Class that creates game over layer when player dies.
  */
 public class GameOverOverlay {
-    private Font monospacedBold = new Font(Font.MONOSPACED, Font.BOLD, 25);
+    private Font monospacedBold = new Font(Font.MONOSPACED, Font.ROMAN_BASELINE, 25);
+    private Font monospacedBold2 = new Font(Font.MONOSPACED, Font.ROMAN_BASELINE, 80);
     private Playing playing;
 
     /**
@@ -27,13 +28,16 @@ public class GameOverOverlay {
      * @param g
      */
     public void draw(Graphics g){
-        g.setColor(new Color(0,0,0,200));
+        g.setColor(new Color(0, 0, 0,200));
         g.fillRect(0,0, Game.GAME_WIDTH,Game.GAME_HEIGHT);
 
         g.setColor(Color.white);
+        g.setFont(monospacedBold2);
+        g.drawString("Game Over", (int) (Game.GAME_WIDTH /2.6), 150);
         g.setFont(monospacedBold);
-        g.drawString("Game Over", (int) (Game.GAME_WIDTH /2.2), 150);
         g.drawString("Press esc to enter Main menu", (int) (Game.GAME_WIDTH/2.6), 300);
+
+
     }
 
     /**
