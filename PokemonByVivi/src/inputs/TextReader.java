@@ -3,6 +3,7 @@ package inputs;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 /**
@@ -12,9 +13,9 @@ public class TextReader {
     private ArrayList<String> sentences = new ArrayList<>();
     private ArrayList<String> credits = new ArrayList<>();
     private ArrayList<String> futurePlans = new ArrayList<>();
-    private final String STORY = "./src/res/text_files/story.txt";
-    private final String CREDITS = "./src/res/text_files/credits.txt";
-    private final String FUTURE_PLANS = "./src/res/text_files/future_plans.txt";
+    private final String STORY = "/text_files/story.txt";
+    private final String CREDITS = "/text_files/credits.txt";
+    private final String FUTURE_PLANS = "/text_files/future_plans.txt";
 
     /**
      * Class constructor.
@@ -30,14 +31,14 @@ public class TextReader {
     public void read(String fileName){
         BufferedReader bufferedReader;
         try {
-            bufferedReader = new BufferedReader(new FileReader(fileName));
+            bufferedReader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(fileName)));
             while(bufferedReader.ready()) {
                 String line = bufferedReader.readLine();
-                if(fileName.equals("./src/res/text_files/story.txt")){
+                if(fileName.equals("/text_files/story.txt")){
                     sentences.add(line);
-                } else if (fileName.equals("./src/res/text_files/credits.txt")) {
+                } else if (fileName.equals("/text_files/credits.txt")) {
                     credits.add(line);
-                } else if (fileName.equals("./src/res/text_files/future_plans.txt")) {
+                } else if (fileName.equals("/text_files/future_plans.txt")) {
                     futurePlans.add(line);
                 }
 

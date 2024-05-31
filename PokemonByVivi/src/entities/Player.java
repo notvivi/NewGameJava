@@ -79,7 +79,7 @@ public class Player extends Entity {
      * Method that updates players behavior in game.
      */
     public void update() {
-        changeHealth();
+        changeHealthBar();
         if(currentHealth <= 0){
             playing.setGameOver(true);
             return;
@@ -148,7 +148,7 @@ public class Player extends Entity {
     /**
      * Method that changes health as enemies are hitting player.
      */
-    private void changeHealth() {
+    private void changeHealthBar() {
         healthWidth = (int)((currentHealth / (float) maxHealth) * healthBarWidth);
     }
 
@@ -374,14 +374,6 @@ public class Player extends Entity {
      */
     public void setLeft(boolean left) {
         this.left = left;
-    }
-
-    /**
-     * Method that returns if player is moving up.
-     * @return
-     */
-    public boolean isUp() {
-        return up;
     }
 
     /**

@@ -82,7 +82,7 @@ public class MenuButton {
     }
 
     /**
-     * Method that sets current gamestate.
+     * Method that sets current game state.
      */
     public void setGameState(){
         GameState.state = gameState;
@@ -118,5 +118,13 @@ public class MenuButton {
      */
     public void setMousePressed(boolean mousePressed) {
         this.mousePressed = mousePressed;
+    }
+
+    /**
+     * Method that returns index.
+     * @return
+     */
+    public int getIndex() {
+        return index;
     }
 }

@@ -44,10 +44,6 @@ class PlayerTest {
         }
     }
 
-    @Test
-    void render() {
-    }
-
     /**
      * Method that tests update health method.
      */
@@ -67,33 +63,6 @@ class PlayerTest {
 
     @Test
     void resetDirectionBooleans() {
-    }
 
-    @Test
-    void setAttack() {
-    }
-
-    @Test
-    void setLeft() {
-    }
-
-    @Test
-    void isUp() {
-    }
-
-    @Test
-    void setUp() {
-    }
-
-    @Test
-    void setRight() {
-    }
-
-    @Test
-    void setDown() {
-    }
-
-    @Test
-    void setJump() {
     }
 }
