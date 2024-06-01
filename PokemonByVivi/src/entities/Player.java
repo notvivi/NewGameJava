@@ -22,7 +22,7 @@ public class Player extends Entity {
     private int aniSpeed = 20;
     private int playerAction = IDLE;
     private boolean moving = false, attacking = false;
-    private boolean left, up, right, down, jump;
+    private boolean left, right, down, jump;
     private final float  playerSpeed = 2.5f;
     private int[][] levelData;
     private float xDrawOffSet = 21 * Game.SCALE;
@@ -154,6 +154,7 @@ public class Player extends Entity {
 
     /**
      * Method that updates players range.
+     * Source: https://www.youtube.com/@KaarinGaming
      */
     private void updateAttackRangeBox() {
         if(right){
@@ -173,6 +174,7 @@ public class Player extends Entity {
 
     /**
      * Method that ticks through player sprites.
+     * Source: https://www.youtube.com/@KaarinGaming
      */
     private void updateAnimationTick() {
         aniTick++;
@@ -189,6 +191,7 @@ public class Player extends Entity {
 
     /**
      * Method that sets animation of a player.
+     * Source: https://www.youtube.com/@KaarinGaming
      */
     private void setAnimation() {
 
@@ -228,6 +231,7 @@ public class Player extends Entity {
 
     /**
      * Method that checks where is player and updates his gravity.
+     * Source: https://www.youtube.com/@KaarinGaming
      */
     private void updatePosition() {
         float xSpeed = 0;
@@ -324,6 +328,7 @@ public class Player extends Entity {
 
     /**
      * Method that loads player animations and health bar.
+     * Source: https://www.youtube.com/@KaarinGaming
      */
     private void loadAnimations() {
             BufferedImage img = LoadSave.getSpriteAtlas(LoadSave.PLAYER_ATLAS);
@@ -356,7 +361,6 @@ public class Player extends Entity {
     public void resetDirectionBooleans(){
         left = false;
         right = false;
-        up = false;
         down = false;
     }
 
@@ -374,14 +378,6 @@ public class Player extends Entity {
      */
     public void setLeft(boolean left) {
         this.left = left;
-    }
-
-    /**
-     * Method that sets if player moves up.
-     * @param up
-     */
-    public void setUp(boolean up) {
-        this.up = up;
     }
 
     /**

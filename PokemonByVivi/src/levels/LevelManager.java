@@ -26,6 +26,7 @@ public class LevelManager {
 
     /**
      * Method that loads level data.
+     * Source: https://www.youtube.com/@KaarinGaming
      */
     private void importOutsideSprites() {
         BufferedImage image = LoadSave.getSpriteAtlas(LoadSave.LEVEL_ATLAS);
@@ -40,6 +41,7 @@ public class LevelManager {
 
     /**
      * Method that draws level data.
+     * Source: https://www.youtube.com/@KaarinGaming
      * @param g
      * @param levelOffSet
      */

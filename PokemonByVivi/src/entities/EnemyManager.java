@@ -3,7 +3,6 @@ package entities;
 import gamestates.Playing;
 import static utilz.Constants.EnemyConstants.*;
 
-import main.Game;
 import utilz.LoadSave;
 
 import java.awt.*;

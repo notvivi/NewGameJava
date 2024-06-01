@@ -1,8 +1,9 @@
 package main;
 
 import gamestates.*;
-import gamestates.Menu;
+import gamestates.*;
 import levels.SoundPlayer;
+import gamestates.Menu;
 
 import java.awt.*;
 
@@ -35,7 +36,7 @@ public class Game implements Runnable {
      * Class constructor.
      */
     public Game(){
-        playSong();
+        //playSong();
         initClasses();
 
         gamePanel = new GamePanel(this);

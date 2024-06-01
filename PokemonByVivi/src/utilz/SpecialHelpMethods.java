@@ -10,6 +10,7 @@ import java.awt.geom.Rectangle2D;
 public class SpecialHelpMethods {
     /**
      * Method that checks if player can move there.
+     * Source: https://www.youtube.com/@KaarinGaming
      * @param x
      * @param y
      * @param width
@@ -32,6 +33,7 @@ public class SpecialHelpMethods {
 
     /**
      * Method that checks if entity is walking on something.
+     * Source: https://www.youtube.com/@KaarinGaming
      * @param x
      * @param y
      * @param levelData
@@ -54,6 +56,7 @@ public class SpecialHelpMethods {
 
     /**
      * Method that checks if tile is solid.
+     * Source: https://www.youtube.com/@KaarinGaming
      * @param xTile
      * @param yTile
      * @param levelData
@@ -70,6 +73,7 @@ public class SpecialHelpMethods {
 
     /**
      * Method that gets start and end, it checks if it is tile.
+     * Source: https://www.youtube.com/@KaarinGaming
      * @param xStart
      * @param xEnd
      * @param y
@@ -90,6 +94,7 @@ public class SpecialHelpMethods {
 
     /**
      * Method that checks if player is in sight.
+     * Source: https://www.youtube.com/@KaarinGaming
      * @param levelData
      * @param firstHitBox
      * @param secondHitBox
@@ -109,6 +114,7 @@ public class SpecialHelpMethods {
 
     /**
      * Method that checks where currently is player or enemy.
+     * Source: https://www.youtube.com/@KaarinGaming
      * @param hitBox
      * @param xSpeed
      * @return
@@ -126,6 +132,7 @@ public class SpecialHelpMethods {
 
     /**
      * Method that checks where currently is player or enemy.
+     * Source: https://www.youtube.com/@KaarinGaming
      * @param hitBox
      * @param airSpeed
      * @return
@@ -143,6 +150,7 @@ public class SpecialHelpMethods {
 
     /**
      * Method that checks if player is on tile.
+     * Source: https://www.youtube.com/@KaarinGaming
      * @param hitBox
      * @param levelData
      * @return

@@ -244,9 +244,6 @@ public class Playing extends State implements IMethodsForStates {
                 case KeyEvent.VK_D:
                     player.setRight(true);
                     break;
-                case KeyEvent.VK_W:
-                    player.setUp(true);
-                    break;
                 case KeyEvent.VK_SPACE:
                     player.setJump(true);
                     break;
@@ -272,9 +269,6 @@ public class Playing extends State implements IMethodsForStates {
                     break;
                 case KeyEvent.VK_D:
                     player.setRight(false);
-                    break;
-                case KeyEvent.VK_W:
-                    player.setUp(false);
                     break;
                 case KeyEvent.VK_SPACE:
                     player.setJump(false);

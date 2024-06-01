@@ -146,6 +146,7 @@ public abstract class Enemy extends Entity{
 
     /**
      * Method that loops through enemy image and changes enemy state.
+     * Source: https://www.youtube.com/@KaarinGaming
      */
     protected void updateAnimationTick(){
         animationTick++;

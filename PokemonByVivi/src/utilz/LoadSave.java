@@ -18,7 +18,6 @@ public class LoadSave {
     public static final String PLAYER_ATLAS = "res/player_sprites.png";
     public static final String LEVEL_ATLAS = "res/outside_sprites.png";
     public static final String LEVEL_ONE_DATA = "res/level_one_data_long.png";
-    public static final String MENU_BUTTON_ATLAS = "res/button_atlas.png";
     public static final String MENU_POKEDEX = "res/menu_background_pokedex.png";
     public static final String START_BUTTON = "res/play_button2x.png";
     public static final String PIKACHU_MENU_BACKGROUND = "res/pikachu_background.png";
@@ -56,6 +55,7 @@ public class LoadSave {
 
     /**
      * Method that loads pikachu sprite.
+     * Source: https://www.youtube.com/@KaarinGaming
      * @return
      */
     public static ArrayList<Pikachu> getPikachus(){
@@ -75,6 +75,7 @@ public class LoadSave {
 
     /**
      * Method that loads level data.
+     * Source: https://www.youtube.com/@KaarinGaming
      * @return
      */
     public static int[][] getDataAboutLevel(){

@@ -50,6 +50,7 @@ public class Pikachu extends Enemy {
 
     /**
      * Method that updates what pikachu is doing in game.
+     * Source: https://www.youtube.com/@KaarinGaming
      * @param levelData
      * @param player
      */
@@ -98,6 +99,7 @@ public class Pikachu extends Enemy {
 
     /**
      * Method that changes pikachus sprites as he changes directions.
+     * Source: https://www.youtube.com/@KaarinGaming
      * @return
      */
     public int flipX(){
@@ -110,6 +112,7 @@ public class Pikachu extends Enemy {
 
     /**
      * Method that changes pikachus sprites as he changes directions.
+     * Source: https://www.youtube.com/@KaarinGaming
      * @return
      */
     public int flipW(){

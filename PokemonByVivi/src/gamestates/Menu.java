@@ -56,7 +56,7 @@ public class Menu extends State implements IMethodsForStates {
      * Method that creates buttons.
      */
     private void loadButtons() {
-        menuButtons[0] = new MenuButton((int) (Game.GAME_WIDTH / 2.2),(int) (190 * Game.SCALE), 0, GameState.STORY);
+        menuButtons[0] = new MenuButton((int) (Game.GAME_WIDTH / 2),(int) (180 * Game.SCALE), 0, GameState.STORY);
     }
 
     /**

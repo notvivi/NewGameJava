@@ -16,7 +16,7 @@ public class MenuButton {
     private int yPosition;
     private int rowIndex;
     private int index = 0;
-    private int xOffSetCenter = Buttons.BUTTON_WIDTH_DEFAULT / 2;
+    private int xOffSetCenter = Buttons.CIRCLE_BUTTON_WIDTH_DEFAULT;
     private boolean mouseOver;
     private boolean mousePressed;
     public Rectangle buttonHitBox;
@@ -43,17 +43,17 @@ public class MenuButton {
      * Method that creates button hitbox.
      */
     private void isInHitBox() {
-        buttonHitBox = new Rectangle(xPosition - xOffSetCenter,yPosition,Buttons.BUTTON_WIDTH,Buttons.BUTTON_HEIGHT);
+        buttonHitBox = new Rectangle(xPosition - xOffSetCenter,yPosition,Buttons.CIRCLE_BUTTON_WIDTH,Buttons.CIRCLE_BUTTON_HEIGHT);
     }
 
     /**
      * Method that loads button images.
      */
     private void loadImages(){
-        images = new BufferedImage[3];
-        BufferedImage temp = LoadSave.getSpriteAtlas(LoadSave.MENU_BUTTON_ATLAS);
+        images = new BufferedImage[2];
+        BufferedImage temp = LoadSave.getSpriteAtlas(LoadSave.START_BUTTON);
         for(int i = 0; i < images.length;i++){
-            images[i] = temp.getSubimage(i * Buttons.BUTTON_WIDTH_DEFAULT,rowIndex * Buttons.BUTTON_HEIGHT_DEFAULT,Buttons.BUTTON_WIDTH_DEFAULT,Buttons.BUTTON_HEIGHT_DEFAULT);
+            images[i] = temp.getSubimage(i * Buttons.CIRCLE_BUTTON_WIDTH_DEFAULT,rowIndex * Buttons.CIRCLE_BUTTON_HEIGHT_DEFAULT,Buttons.CIRCLE_BUTTON_WIDTH_DEFAULT,Buttons.CIRCLE_BUTTON_HEIGHT_DEFAULT);
         }
 
     }
@@ -64,7 +64,7 @@ public class MenuButton {
      */
     public void draw(Graphics g){
         update();
-        g.drawImage(images[index],xPosition - xOffSetCenter,yPosition,Buttons.BUTTON_WIDTH,Buttons.BUTTON_HEIGHT,null);
+        g.drawImage(images[index],xPosition - xOffSetCenter,yPosition,Buttons.CIRCLE_BUTTON_WIDTH,Buttons.CIRCLE_BUTTON_HEIGHT,null);
     }
 
     /**
@@ -75,10 +75,6 @@ public class MenuButton {
         if(mouseOver) {
             index = 1;
         }
-        if(mousePressed){
-            index = 2;
-        }
-
     }
 
     /**

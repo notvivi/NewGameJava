@@ -40,17 +40,6 @@ public abstract class Entity {
     }
 
     /**
-     * Method that draws hitbox.
-     * @param g
-     * @param xLevelOffSet
-     */
-    public void drawHitBox(Graphics g,int xLevelOffSet){
-        g.setColor(Color.pink);
-        g.drawRect( (int) (hitBox.x - xLevelOffSet), (int) hitBox.y, (int) hitBox.width, (int) hitBox.height);
-
-    }
-
-    /**
      * Method that returns hitbox.
      * @return
      */
